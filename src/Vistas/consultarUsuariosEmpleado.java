@@ -2,7 +2,7 @@ package Vistas;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import BBDD.personaConnect;
+import BBDD.Connect;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -59,7 +59,6 @@ public class consultarUsuariosEmpleado extends JFrame {
 		table = new JTable(tableModel);
 		scrollPane.setViewportView(table);
 		Controlador.Coordinador.mostrarDatos(tableModel);
-
 		
 		
 		JButton btnVolver = new JButton("Volver");
@@ -77,11 +76,11 @@ public class consultarUsuariosEmpleado extends JFrame {
 				
 			}
 		});
-		btnCargarBinario.setBounds(420, 392, 133, 21);
+		btnCargarBinario.setBounds(348, 392, 166, 21);
 		contentPane.add(btnCargarBinario);
 		
 		JButton btnCopiaSeguridad = new JButton("Realizar copia de seguridad");
-		btnCopiaSeguridad.setBounds(563, 392, 166, 21);
+		btnCopiaSeguridad.setBounds(524, 392, 205, 21);
 		contentPane.add(btnCopiaSeguridad);
 	}
 }

@@ -5,21 +5,16 @@ import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
 
-import BBDD.personaConnect;
-import BBDD.reservaConnect;
-import Model.DatosPersona;
-import Model.Persona;
+import BBDD.Connect;
+import Model.Administrador;
+import Model.Empleado;
 
 public class Coordinador {
 	
-	personaConnect myPersonaConnect = new personaConnect();
-	reservaConnect myReservaConnect = new reservaConnect();
-	Persona myPersona = new DatosPersona(); 
+	Connect myConnect = new Connect();
 	
-	public Coordinador(Persona paramPersona,personaConnect paramPersonaConnect,reservaConnect paramReservaConnect){
-		this.myPersonaConnect = paramPersonaConnect;
-		this.myReservaConnect = paramReservaConnect;
-		this.myPersona = paramPersona;
+	public Coordinador(Administrador paramAdmin,Connect paramConnect){
+		this.myConnect = paramConnect;
 		
 	}
 	
@@ -30,14 +25,19 @@ public class Coordinador {
 	
 	public static void mostrarDatos(DefaultTableModel tablemodel) {
 		
-		personaConnect perDb = new personaConnect();
+		Connect perDb = new Connect();
 		
 		try {
-			ArrayList<DatosPersona> personaList = perDb.visualizarUsuarios();
+			ArrayList<Administrador> adminList = perDb.cargarAdmins();
+			ArrayList<Empleado> empleList = perDb.cargarEmpleado();
 			
 			tablemodel.setRowCount(0);
-			for(Persona per: personaList) {
-				tablemodel.addRow(new Object[] {per.getDNI(), per.getNombre(),per.getApellido(),per.getRol(),per.getMail(),per.getTelefono(),per.getContrasena()});
+			for(Administrador admin: adminList) {
+				tablemodel.addRow(new Object[] {admin.getDNI(), admin.getNombre(),admin.getApellido(),admin.getRol(),admin.getMail(),admin.getTelefono(),admin.getContrasena()});
+			}
+			
+			for(Empleado emple: empleList) {
+				tablemodel.addRow(new Object[] {emple.getDNI(), emple.getNombre(),emple.getApellido(),emple.getRol(),emple.getMail(),emple.getTelefono(),emple.getContrasena()});
 			}
 			System.out.println("Se han visualizado los datos correctamente");
 		} catch (SQLException e) {
@@ -47,5 +47,7 @@ public class Coordinador {
 		
 		
 	}
+	
+
 
 }
