@@ -3,6 +3,8 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import ConnectBDD.Connect;
+import main.LogronoAPP;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -11,7 +13,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -74,30 +78,44 @@ public class gestionReserva extends JFrame {
 		btnVolver.setBounds(10, 392, 85, 21);
 		contentPane.add(btnVolver);
 		
-		JButton btnCargarBinario = new JButton("Importar XML");
-		btnCargarBinario.addActionListener(new ActionListener() {
+		JButton btnImportarXML = new JButton("Importar XML");
+		btnImportarXML.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					LogronoAPP.importarXML();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnImportarXML.setBounds(563, 92, 166, 21);
+		contentPane.add(btnImportarXML);
+		
+		JButton btnExportarSesiones = new JButton("Exportar Sesiones");
+		btnExportarSesiones.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 			}
 		});
-		btnCargarBinario.setBounds(563, 92, 166, 21);
-		contentPane.add(btnCargarBinario);
+		btnExportarSesiones.setBounds(563, 123, 166, 21);
+		contentPane.add(btnExportarSesiones);
 		
-		JButton btnCopiaSeguridad = new JButton("Exportar Sesiones");
-		btnCopiaSeguridad.setBounds(563, 123, 166, 21);
-		contentPane.add(btnCopiaSeguridad);
-		
-		JButton btnCopiaSeguridad_1 = new JButton("Editar Reserva");
-		btnCopiaSeguridad_1.addActionListener(new ActionListener() {
+		JButton btnEditarReserva = new JButton("Editar Reserva");
+		btnEditarReserva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnCopiaSeguridad_1.setBounds(563, 154, 166, 21);
-		contentPane.add(btnCopiaSeguridad_1);
+		btnEditarReserva.setBounds(563, 154, 166, 21);
+		contentPane.add(btnEditarReserva);
 		
-		JButton btnCopiaSeguridad_2 = new JButton("Eliminar Reserva");
-		btnCopiaSeguridad_2.setBounds(563, 185, 166, 21);
-		contentPane.add(btnCopiaSeguridad_2);
+		JButton btnEliminarReserva = new JButton("Eliminar Reserva");
+		btnEliminarReserva.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnEliminarReserva.setBounds(563, 185, 166, 21);
+		contentPane.add(btnEliminarReserva);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Filtrar", "DNI_Persona", "Sesión_Código"}));
