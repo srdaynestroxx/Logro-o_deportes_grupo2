@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import BBDD.Connect;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -89,6 +90,7 @@ public class consultarUsuariosEmpleado extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}System.out.println("Copia de seguridad realizada");
+				JOptionPane.showMessageDialog(btnCopiaSeguridad, "Se han guardado los datos en un fichero binario.");
 			}
 		});
 		btnCopiaSeguridad.setBounds(524, 392, 205, 21);
