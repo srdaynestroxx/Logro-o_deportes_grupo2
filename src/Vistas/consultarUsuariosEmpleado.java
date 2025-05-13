@@ -70,14 +70,14 @@ public class consultarUsuariosEmpleado extends JFrame {
 		btnVolver.setBounds(10, 392, 85, 21);
 		contentPane.add(btnVolver);
 		
-		JButton btnCargarBinario = new JButton("Cargar fichero binario");
-		btnCargarBinario.addActionListener(new ActionListener() {
+		JButton btnCargarCopia = new JButton("Cargar copia de seguridad");
+		btnCargarCopia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 			}
 		});
-		btnCargarBinario.setBounds(348, 392, 166, 21);
-		contentPane.add(btnCargarBinario);
+		btnCargarCopia.setBounds(348, 392, 166, 21);
+		contentPane.add(btnCargarCopia);
 		
 		JButton btnCopiaSeguridad = new JButton("Realizar copia de seguridad");
 		btnCopiaSeguridad.addActionListener(new ActionListener() {
