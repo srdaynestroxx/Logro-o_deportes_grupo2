@@ -1,6 +1,8 @@
 package main;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -123,15 +125,12 @@ public class LogronoAPP {
 	    	ResultSet rs = st.executeQuery(consulta);
 	    	
 	    	
-	       // Create a new Document
 	        Document document = builder.newDocument();
 	        
-	        // Create root element
 	        Element root = document.createElement("sesion");
 	        document.appendChild(root);
 	        
 			while(rs.next()) {
-	        // Create book elements and add text content
 	        Element codigo = document.createElement("Codigo");
 	        codigo.appendChild(document.createTextNode(rs.getString("Codigo")));
 	        Element fecha = document.createElement("Fecha");
@@ -145,20 +144,18 @@ public class LogronoAPP {
 	        root.appendChild(aforo);
 	        root.appendChild(actividad);
 			}
-			
-	        // Write to XML file
+		
 	        TransformerFactory transformerFactory = TransformerFactory.newInstance();
 	        Transformer transformer = transformerFactory.newTransformer();
 	        DOMSource source = new DOMSource(document);
 
-	        // Specify your local file path
 	        StreamResult result = new StreamResult(exploradorArchivos());
 	        transformer.transform(source, result);
 
 	        System.out.println("Se ha creado el fichero XML.");
 	}
 
-	//Importar XML a la Base de Datos (Reseras)
+	//Importar XML a la Base de Datos (Reservas)
 	public static void importarXML()  throws SQLException{
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		Document documento = null;
@@ -180,6 +177,15 @@ public class LogronoAPP {
     	Statement st = con.createStatement();
     	String consulta = "INSERT INTO reserva (DNI_Persona, Sesion_Codigo) VALUES ('"+ dni +"', "+ sesion +");";
     	st.executeUpdate(consulta);
+    	
+    	try {
+    	      FileWriter writer = new FileWriter("C:\\Users\\1AW3-24\\git\\Logro-o_deportes_grupo2\\src\\archivosXML-TXT\\TXT\\consulta.txt");
+    	      writer.write(consulta);
+    	      writer.close();
+    	    } catch (IOException e) {
+    	      System.out.println("Error al generar el fichero .txt");
+    	      e.printStackTrace();
+    	    }
     }}
 
 catch (Exception spe)

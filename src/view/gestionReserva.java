@@ -87,7 +87,7 @@ public class gestionReserva extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					LogronoAPP.importarXML();
-					JOptionPane.showMessageDialog(btnImportarXML, "Se ha importado el XML correctamente y se ha generado un archivo .txt.");
+					JOptionPane.showMessageDialog(btnImportarXML, "Se ha importado el XML y se ha generado un archivo .txt.");
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -102,7 +102,7 @@ public class gestionReserva extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					LogronoAPP.exportarXML();
-					JOptionPane.showMessageDialog(btnExportarSesiones, "Se han exportado las sesiones correctamente a la ruta especificada.");
+					JOptionPane.showMessageDialog(btnExportarSesiones, "Se han exportado las sesiones a la ruta especificada.");
 				} catch (ParserConfigurationException | TransformerException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -116,7 +116,7 @@ public class gestionReserva extends JFrame {
 		btnEditarReserva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LogronoAPP.editarReserva();
-				JOptionPane.showMessageDialog(btnEditarReserva, "Se ha actualizado la reserva correctamente.");
+				JOptionPane.showMessageDialog(btnEditarReserva, "Se ha actualizado la reserva.");
 			}
 		});
 		btnEditarReserva.setBounds(563, 154, 166, 21);
