@@ -1,21 +1,34 @@
 package Controlador;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 
 import BBDD.Connect;
 import Model.Administrador;
 import Model.Empleado;
+import Model.Reserva;
+import Model.Sesion;
 
 public class Coordinador {
 	
 	Connect myConnect = new Connect();
+	Administrador myAdministrador = new Administrador();
+	Empleado myEmpleado = new Empleado();
+	Reserva myReserva = new Reserva();
+	Sesion mySesion = new Sesion();
 	
-	public Coordinador(Administrador paramAdmin,Connect paramConnect){
+	public Coordinador(Connect paramConnect,Administrador paramAdmin,Empleado paramEmpleado,Reserva paramReserva,Sesion paramSesion){
 		this.myConnect = paramConnect;
-		
+		this.myAdministrador = paramAdmin;
+		this.myEmpleado = paramEmpleado;
+		this.myReserva = paramReserva;
+		this.mySesion = paramSesion;
 	}
 	
 	public Coordinador() {
@@ -48,6 +61,43 @@ public class Coordinador {
 		
 	}
 	
+	public static void realizarFicheroBinario(JButton btnCopiaSeguridad) throws SQLException {
+		
+		Connect admin = new Connect();
+		Connect emp = new Connect();
+		ArrayList<Empleado> empleado = emp.cargarEmpleado();
+		ArrayList<Administrador> administrador = admin.cargarAdmins();
+
+		// Creamos un objeto de tipo fila para asignarle un archivo
+		File archivo = new File("escritura.dat");
+
+		try {
+			// Para poder escribir utilizaremos un FileOutputStream pasandole
+			// como referencia el archivo de tipo File.
+			FileOutputStream fos = new FileOutputStream(archivo);
+
+			// Y crearemos también una instancia del tipo ObjectOutputStream
+			// al que le pasaremos por parámetro
+			// el objeto de tipo FileOutputStream
+			ObjectOutputStream escribir = new ObjectOutputStream(fos);
+
+			// Escribimos los objetos en el archivo.
+			for (int i = 0; i < empleado.size(); i++) {
+				escribir.writeObject(empleado.get(i));
+			}
+			for (int i = 0; i < administrador.size(); i++) {
+				escribir.writeObject(administrador.get(i));
+			}
+
+			// Cerramos los objetos para no consumir recursos.
+			escribir.close();
+			fos.close();
+	
+			
+		} catch (Exception e) {
+			System.out.println("Error al escribir en el archivo. " + e.getMessage());
+		}
+	}
+	}
 
 
-}

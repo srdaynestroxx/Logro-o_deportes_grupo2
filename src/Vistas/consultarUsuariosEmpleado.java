@@ -80,6 +80,17 @@ public class consultarUsuariosEmpleado extends JFrame {
 		contentPane.add(btnCargarBinario);
 		
 		JButton btnCopiaSeguridad = new JButton("Realizar copia de seguridad");
+		btnCopiaSeguridad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Controlador.Coordinador.realizarFicheroBinario(btnCopiaSeguridad);
+				} catch (SQLException e1) {
+					
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}System.out.println("Copia de seguridad realizada");
+			}
+		});
 		btnCopiaSeguridad.setBounds(524, 392, 205, 21);
 		contentPane.add(btnCopiaSeguridad);
 	}
