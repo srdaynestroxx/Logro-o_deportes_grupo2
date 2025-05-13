@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.sql.DriverManager;
 
+import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,10 +25,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import ConnectBDD.Connect;
-import model.Administrador;
-import model.Empleado;
-import model.Reserva;
-import model.Sesion;
 import view.gestionReserva;
 
 public class LogronoAPP {
@@ -38,22 +35,38 @@ public class LogronoAPP {
 		//importarXML();
 		//exportarXML();
 		//editarReserva();
-		eliminarReserva();
+		//eliminarReserva();
 	}
 	
+	public static String exploradorArchivos ()
+	{
+	String filepath = "";
+	JFileChooser selector = new JFileChooser (); selector.setCurrentDirectory (new File("."));
+	int result = selector.showOpenDialog (selector);
+	if (result == JFileChooser. APPROVE_OPTION)
+	{
+
+	File selectedFile = selector.getSelectedFile(); 
+
+	filepath = selectedFile.getAbsolutePath();
+	}
+	return filepath;
+	}
+
+	//Eliminar Reservas
 	public static void eliminarReserva() {
 		Connect conexion = new Connect();
 		Connection con = conexion.conexion();
 		Statement st;
 
-		int row = gestionReserva.table.getSelectedRow(); // get selected row index.
+		int row = gestionReserva.table.getSelectedRow(); 
 		DefaultTableModel model = (DefaultTableModel) gestionReserva.table.getModel();
 		// getValueAt (row index, column index)
 		
         try {
 			st = con.createStatement();
 		
-		String dni = (model.getValueAt (row, 0).toString()); //Selected row: column 1 
+		String dni = (model.getValueAt (row, 0).toString()); 
 		int sesion = Integer.valueOf(model.getValueAt (row, 1).toString());
 		
 		String consulta = "DELETE FROM reserva WHERE DNI_Persona = '" + dni +"' AND Sesion_Codigo = '"+ sesion +"'";
@@ -70,6 +83,7 @@ public class LogronoAPP {
 		   }
 	}
 
+	//Editar Reservas
 	public static void editarReserva() {
 			Connect conexion = new Connect();
 			Connection con = conexion.conexion();
@@ -96,6 +110,7 @@ public class LogronoAPP {
 	        }		
 	}
 
+	//Exportar Sesiones XML
 	public static void exportarXML() throws ParserConfigurationException, TransformerException, SQLException {
 		 DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 	        DocumentBuilder builder = factory.newDocumentBuilder();
@@ -137,13 +152,13 @@ public class LogronoAPP {
 	        DOMSource source = new DOMSource(document);
 
 	        // Specify your local file path
-	        StreamResult result = new StreamResult("C:\\Users\\1AW3-24\\git\\Logro-o_deportes_grupo2\\src\\main\\XML\\sesiones.xml");
+	        StreamResult result = new StreamResult(exploradorArchivos());
 	        transformer.transform(source, result);
 
-	        System.out.println("XML file created successfully!");
+	        System.out.println("Se ha creado el fichero XML.");
 	}
 
-	
+	//Importar XML a la Base de Datos (Reseras)
 	public static void importarXML()  throws SQLException{
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		Document documento = null;
@@ -152,9 +167,9 @@ public class LogronoAPP {
 	Connect conexion = new Connect();
     Connection con = conexion.conexion();
 	DocumentBuilder builder = factory.newDocumentBuilder(); 
-	documento = builder.parse( new File("C:/Users/1AW3-24/git/Logro-o_deportes_grupo2/src/main/XML/pruebaReto.xml") );
+	documento = builder.parse( new File(exploradorArchivos()) );
 	NodeList nodeList = documento.getElementsByTagName("reserva");
-    for (int i = 0; i < nodeList.getLength(); i = i++) {
+    for (int i = 0; i < nodeList.getLength(); i = i+2) {
         Node node = nodeList.item(i);
         String reserva = node.getTextContent();
         String[] datos = reserva.split("\n");

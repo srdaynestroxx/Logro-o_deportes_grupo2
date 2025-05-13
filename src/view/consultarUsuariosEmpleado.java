@@ -64,7 +64,8 @@ public class consultarUsuariosEmpleado extends JFrame {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+				new menu().setVisible(true);
+		        consultarUsuariosEmpleado.this.dispose();
 			}
 		});
 		btnVolver.setBounds(10, 392, 85, 21);

@@ -6,6 +6,7 @@ import ConnectBDD.Connect;
 import main.LogronoAPP;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -74,7 +75,8 @@ public class gestionReserva extends JFrame {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+				new menu().setVisible(true);
+		        gestionReserva.this.dispose();
 			}
 		});
 		btnVolver.setBounds(10, 392, 85, 21);
@@ -85,6 +87,7 @@ public class gestionReserva extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					LogronoAPP.importarXML();
+					JOptionPane.showMessageDialog(btnImportarXML, "Se ha importado el XML correctamente y se ha generado un archivo .txt.");
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -99,6 +102,7 @@ public class gestionReserva extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					LogronoAPP.exportarXML();
+					JOptionPane.showMessageDialog(btnExportarSesiones, "Se han exportado las sesiones correctamente a la ruta especificada.");
 				} catch (ParserConfigurationException | TransformerException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -112,6 +116,7 @@ public class gestionReserva extends JFrame {
 		btnEditarReserva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LogronoAPP.editarReserva();
+				JOptionPane.showMessageDialog(btnEditarReserva, "Se ha actualizado la reserva correctamente.");
 			}
 		});
 		btnEditarReserva.setBounds(563, 154, 166, 21);
@@ -121,6 +126,7 @@ public class gestionReserva extends JFrame {
 		btnEliminarReserva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LogronoAPP.eliminarReserva();
+				JOptionPane.showMessageDialog(btnEliminarReserva, "Se ha eliminado la reserva.");
 			}
 		});
 		btnEliminarReserva.setBounds(563, 185, 166, 21);
