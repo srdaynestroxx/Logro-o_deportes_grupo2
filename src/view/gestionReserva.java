@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
@@ -25,7 +27,7 @@ public class gestionReserva extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTable table;
+	public static JTable table;
 	public DefaultTableModel tableModel;
 	private JTextField textField;
 
@@ -66,7 +68,7 @@ public class gestionReserva extends JFrame {
                 0);
 		table = new JTable(tableModel);
 		scrollPane.setViewportView(table);
-		Controlador.Coordinador.mostrarDatos(tableModel);
+		Controlador.Coordinador.mostrarDatosReserva(tableModel);
 		
 		
 		JButton btnVolver = new JButton("Volver");
@@ -95,15 +97,21 @@ public class gestionReserva extends JFrame {
 		JButton btnExportarSesiones = new JButton("Exportar Sesiones");
 		btnExportarSesiones.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				try {
+					LogronoAPP.exportarXML();
+				} catch (ParserConfigurationException | TransformerException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnExportarSesiones.setBounds(563, 123, 166, 21);
 		contentPane.add(btnExportarSesiones);
 		
-		JButton btnEditarReserva = new JButton("Editar Reserva");
+		JButton btnEditarReserva = new JButton("Actualizar Reserva");
 		btnEditarReserva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				LogronoAPP.editarReserva();
 			}
 		});
 		btnEditarReserva.setBounds(563, 154, 166, 21);
@@ -112,6 +120,7 @@ public class gestionReserva extends JFrame {
 		JButton btnEliminarReserva = new JButton("Eliminar Reserva");
 		btnEliminarReserva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				LogronoAPP.eliminarReserva();
 			}
 		});
 		btnEliminarReserva.setBounds(563, 185, 166, 21);

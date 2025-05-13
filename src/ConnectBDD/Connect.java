@@ -14,7 +14,7 @@ import model.Sesion;
 
 public class Connect {
 	
-private Connection conexion() {
+public Connection conexion() {
 		
 		String url = "jdbc:mysql://localhost:3306/LOGRONO";
 
@@ -60,7 +60,7 @@ public ArrayList<Administrador> cargarAdmins() throws SQLException{
 			administradores.add(admin);
 		}
 	} catch (SQLException e) {
-	System.out.println("ERROR AÑADIENDO ADMINISTRADORES AL ARRAYLIST");
+	System.out.println("ERROR AÑADIENDO ADMINISTRADORES");
 		e.printStackTrace();
 	}
 	
@@ -92,7 +92,7 @@ public ArrayList<Empleado> cargarEmpleado() throws SQLException{
 			empleados.add(empleado);
 		}
 	} catch (SQLException e) {
-	System.out.println("ERROR AÑADIENDO EMPLEADOS AL ARRAYLIST");
+	System.out.println("ERROR AÑADIENDO EMPLEADOS");
 		e.printStackTrace();
 	}
 	
