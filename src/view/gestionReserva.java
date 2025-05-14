@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.swing.JScrollPane;
@@ -23,6 +24,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class gestionReserva extends JFrame {
 
@@ -132,12 +137,39 @@ public class gestionReserva extends JFrame {
 		btnEliminarReserva.setBounds(563, 185, 166, 21);
 		contentPane.add(btnEliminarReserva);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Filtrar", "DNI_Persona", "Sesión_Código"}));
-		comboBox.setBounds(21, 38, 85, 21);
-		contentPane.add(comboBox);
+		//ORDENAR ALFABETICAMENTE
+		TableRowSorter sorter = new TableRowSorter(tableModel);
+		table.setRowSorter(sorter);
+				
+		//FILTRO
+		JComboBox filtroCombo = new JComboBox();
+		filtroCombo.setModel(new DefaultComboBoxModel(new String[] {"Filtrar", "DNI_Persona", "Sesión_Código"}));
+		filtroCombo.setBounds(21, 38, 85, 21);
+		contentPane.add(filtroCombo);
 		
 		textField = new JTextField();
+		textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent enter) {
+				
+				sorter.setRowFilter(new RowFilter() {
+					@Override
+					public boolean include(Entry entry) {
+						
+						int columnaElegida = 0;
+						if ("DNI_Persona" == (String)filtroCombo.getSelectedItem()){
+							columnaElegida = 0;
+						} else if ("Sesión_Código" == (String)filtroCombo.getSelectedItem()) {
+							columnaElegida = 1;
+						}
+						
+						String nombre = entry.getValue(columnaElegida).toString();
+		 				String searchText = textField.getText();
+						return nombre.startsWith(searchText);
+					}
+				});
+			}
+		});
 		textField.setBounds(116, 39, 96, 19);
 		contentPane.add(textField);
 		textField.setColumns(10);
