@@ -22,7 +22,6 @@ public class consultarUsuariosEmpleado extends JFrame {
 	private JTable table;
 	public DefaultTableModel tableModel;
 
-
 	/**
 	 * Launch the application.
 	 */
@@ -50,18 +49,17 @@ public class consultarUsuariosEmpleado extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(54, 37, 675, 239);
 		contentPane.add(scrollPane);
-		
-		tableModel = new DefaultTableModel(new Object[] { "DNI", "Nombre", "Apellido", "Rol", "Mail", "Telefono", "Contraseña" },
-                0);
+
+		tableModel = new DefaultTableModel(
+				new Object[] { "DNI", "Nombre", "Apellido", "Rol", "Mail", "Telefono", "Contraseña" }, 0);
 		table = new JTable(tableModel);
 		scrollPane.setViewportView(table);
 		Controlador.Coordinador.mostrarDatos(tableModel);
-		
-		
+
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -70,26 +68,27 @@ public class consultarUsuariosEmpleado extends JFrame {
 		});
 		btnVolver.setBounds(10, 392, 85, 21);
 		contentPane.add(btnVolver);
-		
+
 		JButton btnCargarCopia = new JButton("Cargar copia de seguridad");
 		btnCargarCopia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 			}
 		});
 		btnCargarCopia.setBounds(348, 392, 166, 21);
 		contentPane.add(btnCargarCopia);
-		
+
 		JButton btnCopiaSeguridad = new JButton("Realizar copia de seguridad");
 		btnCopiaSeguridad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Controlador.Coordinador.realizarFicheroBinario(btnCopiaSeguridad);
 				} catch (SQLException e1) {
-					
+
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}System.out.println("Copia de seguridad realizada");
+				}
+				System.out.println("Copia de seguridad realizada");
 				JOptionPane.showMessageDialog(btnCopiaSeguridad, "Se han guardado los datos en un fichero binario.");
 			}
 		});

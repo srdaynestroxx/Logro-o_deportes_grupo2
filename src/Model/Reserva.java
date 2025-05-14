@@ -1,9 +1,8 @@
 package Model;
 
-
-public class Reserva  {
-	private String dniPersona;
+public class Reserva {
 	
+	private String dniPersona;
 	private int sesionCodigo;
 	
 	public Reserva() {}
