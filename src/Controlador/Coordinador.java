@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -91,8 +92,13 @@ public class Coordinador {
 
 	public static String exploradorArchivos() {
 		String filepath = "";
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("XML File", ".xml");
 		JFileChooser selector = new JFileChooser();
-		selector.setCurrentDirectory(new File("."));
+		
+		selector.setFileFilter(filter);
+		selector.setSelectedFile(new File("sesiones.xml"));
+		selector.setCurrentDirectory(new File("./src/archivosXML-TXT/XML"));
+		
 		int result = selector.showOpenDialog(selector);
 		if (result == JFileChooser.APPROVE_OPTION) {
 
@@ -185,18 +191,18 @@ public class Coordinador {
 
 			Element codigo = document.createElement("codigo");
 			codigo.appendChild(document.createTextNode(rs.getString("Codigo")));
-			Element fecha = document.createElement("secha");
+			Element fecha = document.createElement("fecha");
 			fecha.appendChild(document.createTextNode(rs.getString("Fecha")));
 			Element aforo = document.createElement("aforo");
 			aforo.appendChild(document.createTextNode(rs.getString("Aforo")));
-			Element actividad = document.createElement("actividad_codigo");
-			actividad.appendChild(document.createTextNode(rs.getString("Actividad_Codigo")));
+			Element piscina = document.createElement("piscina");
+			piscina.appendChild(document.createTextNode(rs.getString("Actividad_Codigo")));
 			
 			root.appendChild(sesion);
 			sesion.appendChild(codigo);
 			sesion.appendChild(fecha);
 			sesion.appendChild(aforo);
-			sesion.appendChild(actividad);
+			sesion.appendChild(piscina);
 		}
 
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
