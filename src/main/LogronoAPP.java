@@ -30,8 +30,7 @@ import ConnectBDD.Connect;
 import view.gestionReserva;
 
 public class LogronoAPP {
-	
-	public static void main(String[] args) throws SQLException, ParserConfigurationException, TransformerException
-	{
+
+	public static void main(String[] args) throws SQLException, ParserConfigurationException, TransformerException {
 	}
 }

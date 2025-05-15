@@ -38,7 +38,6 @@ public class gestionReserva extends JFrame {
 	public DefaultTableModel tableModel;
 	private JTextField textField;
 
-
 	/**
 	 * Launch the application.
 	 */
@@ -66,34 +65,33 @@ public class gestionReserva extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(231, 35, 276, 323);
 		contentPane.add(scrollPane);
-		
-		tableModel = new DefaultTableModel(new Object[] { "DNI_Persona", "Sesión_Código"},
-                0);
+
+		tableModel = new DefaultTableModel(new Object[] { "DNI_Persona", "Sesión_Código" }, 0);
 		table = new JTable(tableModel);
 		scrollPane.setViewportView(table);
 		Controlador.Coordinador.mostrarDatosReserva(tableModel);
-		
-		
+
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new menu().setVisible(true);
-		        gestionReserva.this.dispose();
+				gestionReserva.this.dispose();
 			}
 		});
 		btnVolver.setBounds(10, 392, 85, 21);
 		contentPane.add(btnVolver);
-		
+
 		JButton btnImportarXML = new JButton("Importar XML");
 		btnImportarXML.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Coordinador.importarXML();
-					JOptionPane.showMessageDialog(btnImportarXML, "Se ha importado el XML y se ha generado un archivo .txt.");
+					JOptionPane.showMessageDialog(btnImportarXML,
+							"Se ha importado el XML y se ha generado un archivo .txt.");
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -102,13 +100,14 @@ public class gestionReserva extends JFrame {
 		});
 		btnImportarXML.setBounds(563, 92, 166, 21);
 		contentPane.add(btnImportarXML);
-		
+
 		JButton btnExportarSesiones = new JButton("Exportar Sesiones");
 		btnExportarSesiones.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Coordinador.exportarXML();
-					JOptionPane.showMessageDialog(btnExportarSesiones, "Se han exportado las sesiones a la ruta especificada.");
+					JOptionPane.showMessageDialog(btnExportarSesiones,
+							"Se han exportado las sesiones a la ruta especificada.");
 				} catch (ParserConfigurationException | TransformerException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -117,7 +116,7 @@ public class gestionReserva extends JFrame {
 		});
 		btnExportarSesiones.setBounds(563, 123, 166, 21);
 		contentPane.add(btnExportarSesiones);
-		
+
 		JButton btnEditarReserva = new JButton("Actualizar Reserva");
 		btnEditarReserva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -127,7 +126,7 @@ public class gestionReserva extends JFrame {
 		});
 		btnEditarReserva.setBounds(563, 154, 166, 21);
 		contentPane.add(btnEditarReserva);
-		
+
 		JButton btnEliminarReserva = new JButton("Eliminar Reserva");
 		btnEliminarReserva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -137,35 +136,35 @@ public class gestionReserva extends JFrame {
 		});
 		btnEliminarReserva.setBounds(563, 185, 166, 21);
 		contentPane.add(btnEliminarReserva);
-		
-		//ORDENAR ALFABETICAMENTE
+
+		// ORDENAR ALFABETICAMENTE
 		TableRowSorter sorter = new TableRowSorter(tableModel);
 		table.setRowSorter(sorter);
-				
-		//FILTRO
+
+		// FILTRO
 		JComboBox filtroCombo = new JComboBox();
-		filtroCombo.setModel(new DefaultComboBoxModel(new String[] {"Filtrar", "DNI_Persona", "Sesión_Código"}));
+		filtroCombo.setModel(new DefaultComboBoxModel(new String[] { "Filtrar", "DNI_Persona", "Sesión_Código" }));
 		filtroCombo.setBounds(10, 38, 96, 21);
 		contentPane.add(filtroCombo);
-		
+
 		textField = new JTextField();
 		textField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent enter) {
-				
+
 				sorter.setRowFilter(new RowFilter() {
 					@Override
 					public boolean include(Entry entry) {
-						
+
 						int columnaElegida = 0;
-						if ("DNI_Persona" == (String)filtroCombo.getSelectedItem()){
+						if ("DNI_Persona" == (String) filtroCombo.getSelectedItem()) {
 							columnaElegida = 0;
-						} else if ("Sesión_Código" == (String)filtroCombo.getSelectedItem()) {
+						} else if ("Sesión_Código" == (String) filtroCombo.getSelectedItem()) {
 							columnaElegida = 1;
 						}
-						
+
 						String nombre = entry.getValue(columnaElegida).toString();
-		 				String searchText = textField.getText();
+						String searchText = textField.getText();
 						return nombre.startsWith(searchText);
 					}
 				});

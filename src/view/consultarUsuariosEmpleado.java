@@ -21,7 +21,6 @@ public class consultarUsuariosEmpleado extends JFrame {
 	private JTable table;
 	public DefaultTableModel tableModel;
 
-
 	/**
 	 * Launch the application.
 	 */
@@ -49,40 +48,39 @@ public class consultarUsuariosEmpleado extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(54, 37, 675, 239);
 		contentPane.add(scrollPane);
-		
-		tableModel = new DefaultTableModel(new Object[] { "DNI", "Nombre", "Apellido", "Rol", "Mail", "Telefono", "Contraseña" },
-                0);
+
+		tableModel = new DefaultTableModel(
+				new Object[] { "DNI", "Nombre", "Apellido", "Rol", "Mail", "Telefono", "Contraseña" }, 0);
 		table = new JTable(tableModel);
 		scrollPane.setViewportView(table);
 		Controlador.Coordinador.mostrarDatosUsuario(tableModel);
-		
-		
+
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new menu().setVisible(true);
-		        consultarUsuariosEmpleado.this.dispose();
+				consultarUsuariosEmpleado.this.dispose();
 			}
 		});
 		btnVolver.setBounds(10, 392, 85, 21);
 		contentPane.add(btnVolver);
-		
+
 		JButton btnCargarBinario = new JButton("Cargar fichero binario");
 		btnCargarBinario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 			}
 		});
 		btnCargarBinario.setBounds(348, 392, 166, 21);
 		contentPane.add(btnCargarBinario);
-		
+
 		JButton btnCopiaSeguridad = new JButton("Realizar copia de seguridad");
 		btnCopiaSeguridad.setBounds(524, 392, 205, 21);
 		contentPane.add(btnCopiaSeguridad);
-		
+
 	}
 }

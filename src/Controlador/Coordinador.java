@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -176,26 +177,31 @@ public class Coordinador {
 
 		Document document = builder.newDocument();
 
-		Element root = document.createElement("sesion");
+		Element root = document.createElement("sesiones");
 		document.appendChild(root);
 
 		while (rs.next()) {
-			Element codigo = document.createElement("Codigo");
+			Element sesion = document.createElement("sesion");
+
+			Element codigo = document.createElement("codigo");
 			codigo.appendChild(document.createTextNode(rs.getString("Codigo")));
-			Element fecha = document.createElement("Fecha");
+			Element fecha = document.createElement("secha");
 			fecha.appendChild(document.createTextNode(rs.getString("Fecha")));
-			Element aforo = document.createElement("Aforo");
+			Element aforo = document.createElement("aforo");
 			aforo.appendChild(document.createTextNode(rs.getString("Aforo")));
-			Element actividad = document.createElement("Actividad_Codigo");
+			Element actividad = document.createElement("actividad_codigo");
 			actividad.appendChild(document.createTextNode(rs.getString("Actividad_Codigo")));
-			root.appendChild(codigo);
-			root.appendChild(fecha);
-			root.appendChild(aforo);
-			root.appendChild(actividad);
+			
+			root.appendChild(sesion);
+			sesion.appendChild(codigo);
+			sesion.appendChild(fecha);
+			sesion.appendChild(aforo);
+			sesion.appendChild(actividad);
 		}
 
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
+		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 		DOMSource source = new DOMSource(document);
 
 		StreamResult result = new StreamResult(exploradorArchivos());
@@ -240,9 +246,7 @@ public class Coordinador {
 		}
 
 		catch (Exception spe) {
-			System.out.println("ERROR");
-// Algún tipo de error: fichero no accesible, formato de XML incorrecto, etc.
-
+			System.out.println("ERROR AL IMPORTAR ARCHIVO XML");
 		}
 	}
 
