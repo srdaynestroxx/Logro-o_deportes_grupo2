@@ -1,0 +1,176 @@
+package Vistas;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import BBDD.Connect;
+import main.LogronoAPP;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTextField;
+import javax.swing.RowFilter;
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+public class gestionReserva extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	public static JTable table;
+	public DefaultTableModel tableModel;
+	private JTextField textField;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					gestionReserva frame = new gestionReserva();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public gestionReserva() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 783, 460);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(231, 35, 276, 323);
+		contentPane.add(scrollPane);
+
+		tableModel = new DefaultTableModel(new Object[] { "DNI_Persona", "Sesión_Código" }, 0);
+		table = new JTable(tableModel);
+		scrollPane.setViewportView(table);
+		Controlador.Coordinador.mostrarDatosReserva(tableModel);
+
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new menuAdministrador().setVisible(true);
+				gestionReserva.this.dispose();
+			}
+		});
+		btnVolver.setBounds(10, 392, 85, 21);
+		contentPane.add(btnVolver);
+
+		JButton btnImportarXML = new JButton("Importar XML");
+		btnImportarXML.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Controlador.Coordinador.importarXML();
+					JOptionPane.showMessageDialog(btnImportarXML,
+							"Se ha importado el XML y se ha generado un archivo .txt.");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnImportarXML.setBounds(563, 92, 166, 21);
+		contentPane.add(btnImportarXML);
+
+		JButton btnExportarSesiones = new JButton("Exportar Sesiones");
+		btnExportarSesiones.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Controlador.Coordinador.exportarXML();
+					JOptionPane.showMessageDialog(btnExportarSesiones,
+							"Se han exportado las sesiones a la ruta especificada.");
+				} catch (ParserConfigurationException | TransformerException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnExportarSesiones.setBounds(563, 123, 166, 21);
+		contentPane.add(btnExportarSesiones);
+
+		JButton btnEditarReserva = new JButton("Actualizar Reserva");
+		btnEditarReserva.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controlador.Coordinador.editarReserva();
+				JOptionPane.showMessageDialog(btnEditarReserva, "Se ha actualizado la reserva.");
+			}
+		});
+		btnEditarReserva.setBounds(563, 154, 166, 21);
+		contentPane.add(btnEditarReserva);
+
+		JButton btnEliminarReserva = new JButton("Eliminar Reserva");
+		btnEliminarReserva.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controlador.Coordinador.eliminarReserva();
+				JOptionPane.showMessageDialog(btnEliminarReserva, "Se ha eliminado la reserva.");
+			}
+		});
+		btnEliminarReserva.setBounds(563, 185, 166, 21);
+		contentPane.add(btnEliminarReserva);
+
+		// ORDENAR ALFABETICAMENTE
+		TableRowSorter sorter = new TableRowSorter(tableModel);
+		table.setRowSorter(sorter);
+
+		// FILTRO
+		JComboBox filtroCombo = new JComboBox();
+		filtroCombo.setModel(new DefaultComboBoxModel(new String[] { "Filtrar", "DNI_Persona", "Sesión_Código" }));
+		filtroCombo.setBounds(10, 38, 96, 21);
+		contentPane.add(filtroCombo);
+
+		textField = new JTextField();
+		textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent enter) {
+
+				sorter.setRowFilter(new RowFilter() {
+					@Override
+					public boolean include(Entry entry) {
+
+						int columnaElegida = 0;
+						if ("DNI_Persona" == (String) filtroCombo.getSelectedItem()) {
+							columnaElegida = 0;
+						} else if ("Sesión_Código" == (String) filtroCombo.getSelectedItem()) {
+							columnaElegida = 1;
+						}
+
+						String nombre = entry.getValue(columnaElegida).toString();
+						String searchText = textField.getText();
+						return nombre.startsWith(searchText);
+					}
+				});
+			}
+		});
+		textField.setBounds(116, 39, 96, 19);
+		contentPane.add(textField);
+		textField.setColumns(10);
+	}
+}

@@ -3,23 +3,37 @@ package Vistas;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import BBDD.Connect;
+import main.LogronoAPP;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTextField;
+import javax.swing.RowFilter;
 
-public class consultarUsuariosEmpleado extends JFrame {
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+public class consultarReserva extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTable table;
+	public static JTable table;
 	public DefaultTableModel tableModel;
 
 	/**
@@ -29,7 +43,7 @@ public class consultarUsuariosEmpleado extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					consultarUsuariosEmpleado frame = new consultarUsuariosEmpleado();
+					gestionReserva frame = new gestionReserva();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +55,7 @@ public class consultarUsuariosEmpleado extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public consultarUsuariosEmpleado() {
+	public consultarReserva() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 460);
 		contentPane = new JPanel();
@@ -51,49 +65,26 @@ public class consultarUsuariosEmpleado extends JFrame {
 		contentPane.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(54, 37, 675, 239);
+		scrollPane.setBounds(231, 35, 276, 323);
 		contentPane.add(scrollPane);
 
-		tableModel = new DefaultTableModel(
-				new Object[] { "DNI", "Nombre", "Apellido", "Rol", "Mail", "Telefono", "Contraseña" }, 0);
+		tableModel = new DefaultTableModel(new Object[] { "DNI_Persona", "Sesión_Código" }, 0);
 		table = new JTable(tableModel);
 		scrollPane.setViewportView(table);
-		Controlador.Coordinador.mostrarDatosUsuarioEmpleado(tableModel);
+		Controlador.Coordinador.mostrarDatosReserva(tableModel);
 
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new menuEmpleado().setVisible(true);
-		        consultarUsuariosEmpleado.this.dispose();
+				consultarReserva.this.dispose();
 			}
 		});
 		btnVolver.setBounds(10, 392, 85, 21);
 		contentPane.add(btnVolver);
 
-		JButton btnCargarCopia = new JButton("Cargar copia de seguridad");
-		btnCargarCopia.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
-		btnCargarCopia.setBounds(348, 392, 166, 21);
-		contentPane.add(btnCargarCopia);
-
-		JButton btnCopiaSeguridad = new JButton("Realizar copia de seguridad");
-		btnCopiaSeguridad.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					Controlador.Coordinador.realizarFicheroBinario(btnCopiaSeguridad);
-				} catch (SQLException e1) {
-
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				System.out.println("Copia de seguridad realizada");
-				JOptionPane.showMessageDialog(btnCopiaSeguridad, "Se han guardado los datos en un fichero binario.");
-			}
-		});
-		btnCopiaSeguridad.setBounds(524, 392, 205, 21);
-		contentPane.add(btnCopiaSeguridad);
+		// ORDENAR ALFABETICAMENTE
+		TableRowSorter sorter = new TableRowSorter(tableModel);
+		table.setRowSorter(sorter);
 	}
 }

@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
-public class consultarUsuariosEmpleado extends JFrame {
+public class consultarUsuariosAdministrador extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -41,7 +41,7 @@ public class consultarUsuariosEmpleado extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public consultarUsuariosEmpleado() {
+	public consultarUsuariosAdministrador() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 460);
 		contentPane = new JPanel();
@@ -58,13 +58,13 @@ public class consultarUsuariosEmpleado extends JFrame {
 				new Object[] { "DNI", "Nombre", "Apellido", "Rol", "Mail", "Telefono", "Contraseña" }, 0);
 		table = new JTable(tableModel);
 		scrollPane.setViewportView(table);
-		Controlador.Coordinador.mostrarDatosUsuarioEmpleado(tableModel);
+		Controlador.Coordinador.mostrarDatosUsuarioAdministrador(tableModel);
 
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new menuEmpleado().setVisible(true);
-		        consultarUsuariosEmpleado.this.dispose();
+				new menuAdministrador().setVisible(true);
+		        consultarUsuariosAdministrador.this.dispose();
 			}
 		});
 		btnVolver.setBounds(10, 392, 85, 21);
