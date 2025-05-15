@@ -3,6 +3,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import ConnectBDD.Connect;
+import Controlador.Coordinador;
 import main.LogronoAPP;
 
 import javax.swing.JFrame;
@@ -91,7 +92,7 @@ public class gestionReserva extends JFrame {
 		btnImportarXML.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					LogronoAPP.importarXML();
+					Coordinador.importarXML();
 					JOptionPane.showMessageDialog(btnImportarXML, "Se ha importado el XML y se ha generado un archivo .txt.");
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
@@ -106,7 +107,7 @@ public class gestionReserva extends JFrame {
 		btnExportarSesiones.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					LogronoAPP.exportarXML();
+					Coordinador.exportarXML();
 					JOptionPane.showMessageDialog(btnExportarSesiones, "Se han exportado las sesiones a la ruta especificada.");
 				} catch (ParserConfigurationException | TransformerException | SQLException e1) {
 					// TODO Auto-generated catch block
@@ -120,7 +121,7 @@ public class gestionReserva extends JFrame {
 		JButton btnEditarReserva = new JButton("Actualizar Reserva");
 		btnEditarReserva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LogronoAPP.editarReserva();
+				Coordinador.editarReserva();
 				JOptionPane.showMessageDialog(btnEditarReserva, "Se ha actualizado la reserva.");
 			}
 		});
@@ -130,7 +131,7 @@ public class gestionReserva extends JFrame {
 		JButton btnEliminarReserva = new JButton("Eliminar Reserva");
 		btnEliminarReserva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LogronoAPP.eliminarReserva();
+				Coordinador.eliminarReserva();
 				JOptionPane.showMessageDialog(btnEliminarReserva, "Se ha eliminado la reserva.");
 			}
 		});

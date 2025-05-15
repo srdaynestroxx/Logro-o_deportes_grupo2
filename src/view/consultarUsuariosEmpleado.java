@@ -83,5 +83,6 @@ public class consultarUsuariosEmpleado extends JFrame {
 		JButton btnCopiaSeguridad = new JButton("Realizar copia de seguridad");
 		btnCopiaSeguridad.setBounds(524, 392, 205, 21);
 		contentPane.add(btnCopiaSeguridad);
+		
 	}
 }
