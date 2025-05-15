@@ -144,7 +144,7 @@ public class gestionReserva extends JFrame {
 		//FILTRO
 		JComboBox filtroCombo = new JComboBox();
 		filtroCombo.setModel(new DefaultComboBoxModel(new String[] {"Filtrar", "DNI_Persona", "Sesión_Código"}));
-		filtroCombo.setBounds(21, 38, 85, 21);
+		filtroCombo.setBounds(10, 38, 96, 21);
 		contentPane.add(filtroCombo);
 		
 		textField = new JTextField();
