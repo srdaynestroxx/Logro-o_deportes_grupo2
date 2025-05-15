@@ -94,7 +94,7 @@ public class gestionReserva extends JFrame {
 							"Se ha importado el XML y se ha generado un archivo .txt.");
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(btnImportarXML, "Ha ocurrido un error al importar o se ha cancelado la operación.");
 				}
 			}
 		});
@@ -110,7 +110,7 @@ public class gestionReserva extends JFrame {
 							"Se han exportado las sesiones a la ruta especificada.");
 				} catch (ParserConfigurationException | TransformerException | SQLException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(btnExportarSesiones, "Ha ocurrido un error al exportar o se ha cancelado la operación.");
 				}
 			}
 		});
