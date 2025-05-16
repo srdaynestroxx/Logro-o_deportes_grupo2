@@ -52,7 +52,7 @@ public class menuEmpleado extends JFrame {
 		});
 		contentPane.add(btnConsultarUsuarios);
 		
-		JButton btnGestionarReservas = new JButton("Gestionar Reservas");
+		JButton btnGestionarReservas = new JButton("Consultar Reservas");
 		btnGestionarReservas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new consultarReserva().setVisible(true);

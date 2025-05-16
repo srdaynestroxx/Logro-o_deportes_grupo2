@@ -102,7 +102,7 @@ public class Coordinador implements ActionListener {
 
 			for (Empleado emple : empleList) {
 				tablemodel.addRow(new Object[] { emple.getDNI(), emple.getNombre(), emple.getApellido(), emple.getRol(),
-						emple.getMail(), emple.getTelefono(), emple.getContrasena() });
+						emple.getMail(), emple.getTelefono() });
 			}
 			System.out.println("Se han visualizado los datos correctamente");
 		} catch (SQLException e) {

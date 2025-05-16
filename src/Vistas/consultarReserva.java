@@ -70,6 +70,7 @@ public class consultarReserva extends JFrame {
 
 		tableModel = new DefaultTableModel(new Object[] { "DNI_Persona", "Sesión_Código" }, 0);
 		table = new JTable(tableModel);
+		table.setEnabled(false);
 		scrollPane.setViewportView(table);
 		Controlador.Coordinador.mostrarDatosReserva(tableModel);
 

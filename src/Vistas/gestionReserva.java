@@ -3,6 +3,7 @@ package Vistas;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import BBDD.Connect;
+import Controlador.Coordinador;
 import main.LogronoAPP;
 
 import javax.swing.JFrame;
@@ -88,12 +89,13 @@ public class gestionReserva extends JFrame {
 		btnImportarXML.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Controlador.Coordinador.importarXML();
+					Coordinador.importarXML();
 					JOptionPane.showMessageDialog(btnImportarXML,
 							"Se ha importado el XML y se ha generado un archivo .txt.");
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(btnImportarXML,
+							"Ha ocurrido un error al importar o se ha cancelado la operación.");
 				}
 			}
 		});
@@ -104,12 +106,13 @@ public class gestionReserva extends JFrame {
 		btnExportarSesiones.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Controlador.Coordinador.exportarXML();
+					Coordinador.exportarXML();
 					JOptionPane.showMessageDialog(btnExportarSesiones,
 							"Se han exportado las sesiones a la ruta especificada.");
 				} catch (ParserConfigurationException | TransformerException | SQLException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(btnExportarSesiones,
+							"Ha ocurrido un error al exportar o se ha cancelado la operación.");
 				}
 			}
 		});
@@ -119,7 +122,7 @@ public class gestionReserva extends JFrame {
 		JButton btnEditarReserva = new JButton("Actualizar Reserva");
 		btnEditarReserva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Controlador.Coordinador.editarReserva();
+				Coordinador.editarReserva();
 				JOptionPane.showMessageDialog(btnEditarReserva, "Se ha actualizado la reserva.");
 			}
 		});
@@ -129,7 +132,7 @@ public class gestionReserva extends JFrame {
 		JButton btnEliminarReserva = new JButton("Eliminar Reserva");
 		btnEliminarReserva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Controlador.Coordinador.eliminarReserva();
+				Coordinador.eliminarReserva();
 				JOptionPane.showMessageDialog(btnEliminarReserva, "Se ha eliminado la reserva.");
 			}
 		});
