@@ -1,16 +1,21 @@
 package Controlador;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.parsers.DocumentBuilder;
@@ -32,19 +37,162 @@ import ConnectBDD.Connect;
 import model.Administrador;
 import model.Empleado;
 import model.Reserva;
-import view.gestionReserva;
+import model.Sesion;
+import view.GestionReserva;
+import view.Menu;
+import view.MenuEmpleado;
 
 public class Coordinador {
 
-	ConnectBDD.Connect myConnect = new ConnectBDD.Connect();
+	ConnectBDD.Connect connect = new ConnectBDD.Connect();
 
 	public Coordinador(Administrador paramAdmin, ConnectBDD.Connect paramConnect) {
 		this.myConnect = paramConnect;
 
 	}
 
+	Connect myConnect = new Connect();
+	Administrador myAdministrador = new Administrador();
+	Empleado myEmpleado = new Empleado();
+	Reserva myReserva = new Reserva();
+	Sesion mySesion = new Sesion();
+
+	public Coordinador(Connect paramConnect, Administrador paramAdmin, Empleado paramEmpleado, Reserva paramReserva,
+			Sesion paramSesion) {
+		this.myConnect = paramConnect;
+		this.myAdministrador = paramAdmin;
+		this.myEmpleado = paramEmpleado;
+		this.myReserva = paramReserva;
+		this.mySesion = paramSesion;
+	}
+
 	public Coordinador() {
 
+	}
+
+	public static void mostrarDatosUsuarioAdministrador(DefaultTableModel tablemodel) {
+
+		Connect perDb = new Connect();
+
+		try {
+			ArrayList<Administrador> adminList = perDb.cargarAdmins();
+			ArrayList<Empleado> empleList = perDb.cargarEmpleado();
+
+			tablemodel.setRowCount(0);
+			for (Administrador admin : adminList) {
+				tablemodel.addRow(new Object[] { admin.getDNI(), admin.getNombre(), admin.getApellido(), admin.getRol(),
+						admin.getMail(), admin.getTelefono(), admin.getContrasena() });
+			}
+
+			for (Empleado emple : empleList) {
+				tablemodel.addRow(new Object[] { emple.getDNI(), emple.getNombre(), emple.getApellido(), emple.getRol(),
+						emple.getMail(), emple.getTelefono(), emple.getContrasena() });
+			}
+			System.out.println("Se han visualizado los datos correctamente");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public static void mostrarDatosUsuarioEmpleado(DefaultTableModel tablemodel) {
+
+		Connect perDb = new Connect();
+
+		try {
+			ArrayList<Empleado> empleList = perDb.cargarEmpleado();
+
+			tablemodel.setRowCount(0);
+
+			for (Empleado emple : empleList) {
+				tablemodel.addRow(new Object[] { emple.getDNI(), emple.getNombre(), emple.getApellido(), emple.getRol(),
+						emple.getMail(), emple.getTelefono(), emple.getContrasena() });
+			}
+			System.out.println("Se han visualizado los datos correctamente");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public static void realizarFicheroBinario(JButton btnCopiaSeguridad) throws SQLException {
+
+		Connect admin = new Connect();
+		Connect emp = new Connect();
+		ArrayList<Empleado> empleado = emp.cargarEmpleado();
+		ArrayList<Administrador> administrador = admin.cargarAdmins();
+
+		// Creamos un objeto de tipo fila para asignarle un archivo
+		File archivo = new File(exploradorArchivosBinario());
+
+		try {
+			// Para poder escribir utilizaremos un FileOutputStream pasandole
+			// como referencia el archivo de tipo File.
+			FileOutputStream fos = new FileOutputStream(archivo);
+
+			// Y crearemos también una instancia del tipo ObjectOutputStream
+			// al que le pasaremos por parámetro
+			// el objeto de tipo FileOutputStream
+			ObjectOutputStream escribir = new ObjectOutputStream(fos);
+
+			// Escribimos los objetos en el archivo.
+			for (int i = 0; i < empleado.size(); i++) {
+				escribir.writeObject(empleado.get(i));
+			}
+			for (int i = 0; i < administrador.size(); i++) {
+				escribir.writeObject(administrador.get(i));
+			}
+
+			// Cerramos los objetos para no consumir recursos.
+			escribir.close();
+			fos.close();
+
+		} catch (Exception e) {
+			System.out.println("Error al escribir en el archivo. " + e.getMessage());
+		}
+	}
+
+	public static void InicioSesion(JButton btnIniciarSesion, JTextField textFieldDNI,
+			JPasswordField passwordFieldContraseña) throws SQLException {
+
+		Connect con = new Connect();
+		boolean enlista = false;
+
+		for (int i = 0; i < con.cargarAdmins().size(); i++) {
+
+			if (con.cargarAdmins().get(i).getDNI().equalsIgnoreCase(textFieldDNI.getText())
+					&& con.cargarAdmins().get(i).getContrasena()
+							.equals(String.valueOf(passwordFieldContraseña.getPassword()))
+					&& con.cargarAdmins().get(i).getRol().equalsIgnoreCase("Administrador")) {
+
+				JOptionPane.showMessageDialog(null, "¡Inicio de sesión correcto como Administrador!");
+				Menu ventana = new Menu();
+				ventana.setVisible(true);
+				enlista = true;
+
+			} else
+				for (int b = 0; b < con.cargarEmpleado().size(); b++) {
+
+					if (con.cargarEmpleado().get(b).getDNI().equalsIgnoreCase(textFieldDNI.getText())
+							&& con.cargarEmpleado().get(b).getContrasena()
+									.equals(String.valueOf(passwordFieldContraseña.getPassword()))
+							&& con.cargarEmpleado().get(b).getRol().equalsIgnoreCase("Usuario")) {
+
+						JOptionPane.showMessageDialog(null, "¡Inicio de sesión correcto como Empleado!");
+						MenuEmpleado ventana2 = new MenuEmpleado();
+						ventana2.setVisible(true);
+						enlista = true;
+
+					}
+
+				}
+		}
+		if (enlista == false) {
+			JOptionPane.showMessageDialog(null, "Las credenciales introducidas no son correctas.");
+
+		}
 	}
 
 	public static void mostrarDatosReserva(DefaultTableModel tablemodel) {
@@ -109,6 +257,25 @@ public class Coordinador {
 		}
 		return filepath;
 	}
+	
+	public static String exploradorArchivosBinario() {
+		String filepath = "";
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("DAT File", "dat");
+		JFileChooser selector = new JFileChooser();
+		
+		selector.setFileFilter(filter);
+		selector.setSelectedFile(new File("*.dat"));
+		selector.setCurrentDirectory(new File("./src/backupUsuarios"));
+		
+		int result = selector.showOpenDialog(selector);
+		if (result == JFileChooser.APPROVE_OPTION) {
+
+			File selectedFile = selector.getSelectedFile();
+
+			filepath = selectedFile.getAbsolutePath();
+		}
+		return filepath;
+	}
 
 //Eliminar Reservas
 	public static void eliminarReserva() {
@@ -116,8 +283,8 @@ public class Coordinador {
 		Connection con = conexion.conexion();
 		Statement st;
 
-		int row = gestionReserva.table.getSelectedRow();
-		DefaultTableModel model = (DefaultTableModel) gestionReserva.table.getModel();
+		int row = GestionReserva.table.getSelectedRow();
+		DefaultTableModel model = (DefaultTableModel) GestionReserva.table.getModel();
 		// getValueAt (row index, column index)
 
 		try {
@@ -135,7 +302,7 @@ public class Coordinador {
 			e.printStackTrace();
 		}
 
-		int[] rows = gestionReserva.table.getSelectedRows();
+		int[] rows = GestionReserva.table.getSelectedRows();
 		for (int i = 0; i < rows.length; i++) {
 			model.removeRow(rows[i] - i);
 		}
@@ -146,7 +313,7 @@ public class Coordinador {
 		Connect conexion = new Connect();
 		Connection con = conexion.conexion();
 		Statement st;
-		DefaultTableModel model = (DefaultTableModel) gestionReserva.table.getModel();
+		DefaultTableModel model = (DefaultTableModel) GestionReserva.table.getModel();
 
 		try {
 			st = con.createStatement();
@@ -239,7 +406,7 @@ public class Coordinador {
 				String consulta = "INSERT INTO reserva (DNI_Persona, Sesion_Codigo) VALUES ('" + dni + "', " + sesion
 						+ ");";
 				st.executeUpdate(consulta);
-				JOptionPane.showMessageDialog(gestionReserva.table,
+				JOptionPane.showMessageDialog(GestionReserva.table,
 						"Se ha importado el XML y se ha generado un archivo .txt.");
 				try {
 					FileWriter writer = new FileWriter(
@@ -254,7 +421,7 @@ public class Coordinador {
 		}
 
 		catch (Exception spe) {
-			JOptionPane.showMessageDialog(gestionReserva.table, "Ha ocurrido un error al importar o se ha cancelado la operación.");
+			JOptionPane.showMessageDialog(GestionReserva.table, "Ha ocurrido un error al importar o se ha cancelado la operación.");
 
 		}
 	}

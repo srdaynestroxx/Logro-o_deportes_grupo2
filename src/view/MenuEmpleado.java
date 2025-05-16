@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class menu extends JFrame {
+public class MenuEmpleado extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -22,7 +22,7 @@ public class menu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					menu frame = new menu();
+					Menu frame = new Menu();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,7 +34,7 @@ public class menu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public menu() {
+	public MenuEmpleado() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 537, 218);
 		contentPane = new JPanel();
@@ -46,8 +46,8 @@ public class menu extends JFrame {
 		JButton btnConsultarUsuarios = new JButton("Consultar Usuarios");
 		btnConsultarUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new consultarUsuariosEmpleado().setVisible(true);
-		        menu.this.dispose();
+				new ConsultarUsuariosEmpleado().setVisible(true);
+		        MenuEmpleado.this.dispose();
 			}
 		});
 		contentPane.add(btnConsultarUsuarios);
@@ -55,8 +55,8 @@ public class menu extends JFrame {
 		JButton btnGestionarReservas = new JButton("Gestionar Reservas");
 		btnGestionarReservas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new gestionReserva().setVisible(true);
-		        menu.this.dispose();
+				new ConsultarReserva().setVisible(true);
+		        MenuEmpleado.this.dispose();
 			}
 		});
 		contentPane.add(btnGestionarReservas);

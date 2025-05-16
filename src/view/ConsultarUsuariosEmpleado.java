@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import ConnectBDD.Connect;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -14,7 +15,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
-public class consultarUsuariosEmpleado extends JFrame {
+public class ConsultarUsuariosEmpleado extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -28,7 +29,7 @@ public class consultarUsuariosEmpleado extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					consultarUsuariosEmpleado frame = new consultarUsuariosEmpleado();
+					ConsultarUsuariosEmpleado frame = new ConsultarUsuariosEmpleado();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +41,7 @@ public class consultarUsuariosEmpleado extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public consultarUsuariosEmpleado() {
+	public ConsultarUsuariosEmpleado() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 460);
 		contentPane = new JPanel();
@@ -57,30 +58,42 @@ public class consultarUsuariosEmpleado extends JFrame {
 				new Object[] { "DNI", "Nombre", "Apellido", "Rol", "Mail", "Telefono", "Contraseña" }, 0);
 		table = new JTable(tableModel);
 		scrollPane.setViewportView(table);
-		Controlador.Coordinador.mostrarDatosUsuario(tableModel);
+		Controlador.Coordinador.mostrarDatosUsuarioEmpleado(tableModel);
 
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new menu().setVisible(true);
-				consultarUsuariosEmpleado.this.dispose();
+				new MenuEmpleado().setVisible(true);
+		        ConsultarUsuariosEmpleado.this.dispose();
 			}
 		});
 		btnVolver.setBounds(10, 392, 85, 21);
 		contentPane.add(btnVolver);
 
-		JButton btnCargarBinario = new JButton("Cargar fichero binario");
-		btnCargarBinario.addActionListener(new ActionListener() {
+		JButton btnCargarCopia = new JButton("Cargar copia de seguridad");
+		btnCargarCopia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 			}
 		});
-		btnCargarBinario.setBounds(348, 392, 166, 21);
-		contentPane.add(btnCargarBinario);
+		btnCargarCopia.setBounds(348, 392, 166, 21);
+		contentPane.add(btnCargarCopia);
 
 		JButton btnCopiaSeguridad = new JButton("Realizar copia de seguridad");
+		btnCopiaSeguridad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Controlador.Coordinador.realizarFicheroBinario(btnCopiaSeguridad);
+				} catch (SQLException e1) {
+
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				System.out.println("Copia de seguridad realizada");
+				JOptionPane.showMessageDialog(btnCopiaSeguridad, "Se han guardado los datos en un fichero binario.");
+			}
+		});
 		btnCopiaSeguridad.setBounds(524, 392, 205, 21);
 		contentPane.add(btnCopiaSeguridad);
-
 	}
 }

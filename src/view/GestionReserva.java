@@ -30,7 +30,7 @@ import javax.swing.RowFilter;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class gestionReserva extends JFrame {
+public class GestionReserva extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -45,7 +45,7 @@ public class gestionReserva extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					gestionReserva frame = new gestionReserva();
+					GestionReserva frame = new GestionReserva();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,7 +57,7 @@ public class gestionReserva extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public gestionReserva() {
+	public GestionReserva() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 460);
 		contentPane = new JPanel();
@@ -78,8 +78,8 @@ public class gestionReserva extends JFrame {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new menu().setVisible(true);
-				gestionReserva.this.dispose();
+				new Menu().setVisible(true);
+				GestionReserva.this.dispose();
 			}
 		});
 		btnVolver.setBounds(10, 392, 85, 21);

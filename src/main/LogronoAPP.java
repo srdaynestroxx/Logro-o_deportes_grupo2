@@ -27,7 +27,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import ConnectBDD.Connect;
-import view.gestionReserva;
+import view.GestionReserva;
 
 public class LogronoAPP {
 
