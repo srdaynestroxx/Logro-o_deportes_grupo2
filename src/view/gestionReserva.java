@@ -90,8 +90,7 @@ public class gestionReserva extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Coordinador.importarXML();
-					JOptionPane.showMessageDialog(btnImportarXML,
-							"Se ha importado el XML y se ha generado un archivo .txt.");
+					
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(btnImportarXML, "Ha ocurrido un error al importar o se ha cancelado la operación.");
@@ -117,11 +116,11 @@ public class gestionReserva extends JFrame {
 		btnExportarSesiones.setBounds(563, 123, 166, 21);
 		contentPane.add(btnExportarSesiones);
 
-		JButton btnEditarReserva = new JButton("Actualizar Reserva");
+		JButton btnEditarReserva = new JButton("Actualizar Reservas");
 		btnEditarReserva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Coordinador.editarReserva();
-				JOptionPane.showMessageDialog(btnEditarReserva, "Se ha actualizado la reserva.");
+				JOptionPane.showMessageDialog(btnEditarReserva, "Se han actualizado las reservas.");
 			}
 		});
 		btnEditarReserva.setBounds(563, 154, 166, 21);
@@ -150,7 +149,7 @@ public class gestionReserva extends JFrame {
 		textField = new JTextField();
 		textField.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyPressed(KeyEvent enter) {
+			public void keyReleased(KeyEvent e) {
 
 				sorter.setRowFilter(new RowFilter() {
 					@Override

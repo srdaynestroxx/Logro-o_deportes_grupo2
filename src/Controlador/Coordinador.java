@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.parsers.DocumentBuilder;
@@ -92,11 +93,11 @@ public class Coordinador {
 
 	public static String exploradorArchivos() {
 		String filepath = "";
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("XML File", ".xml");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("XML File", "xml");
 		JFileChooser selector = new JFileChooser();
 		
 		selector.setFileFilter(filter);
-		selector.setSelectedFile(new File("sesiones.xml"));
+		selector.setSelectedFile(new File("*.xml"));
 		selector.setCurrentDirectory(new File("./src/archivosXML-TXT/XML"));
 		
 		int result = selector.showOpenDialog(selector);
@@ -238,7 +239,8 @@ public class Coordinador {
 				String consulta = "INSERT INTO reserva (DNI_Persona, Sesion_Codigo) VALUES ('" + dni + "', " + sesion
 						+ ");";
 				st.executeUpdate(consulta);
-
+				JOptionPane.showMessageDialog(gestionReserva.table,
+						"Se ha importado el XML y se ha generado un archivo .txt.");
 				try {
 					FileWriter writer = new FileWriter(
 							"C:\\Users\\1AW3-24\\git\\Logro-o_deportes_grupo2\\src\\archivosXML-TXT\\TXT\\consulta.txt");
@@ -252,7 +254,8 @@ public class Coordinador {
 		}
 
 		catch (Exception spe) {
-			System.out.println("ERROR AL IMPORTAR ARCHIVO XML");
+			JOptionPane.showMessageDialog(gestionReserva.table, "Ha ocurrido un error al importar o se ha cancelado la operación.");
+
 		}
 	}
 
