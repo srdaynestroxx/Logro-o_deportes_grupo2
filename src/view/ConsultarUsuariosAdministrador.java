@@ -29,7 +29,7 @@ public class ConsultarUsuariosAdministrador extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ConsultarUsuariosEmpleado frame = new ConsultarUsuariosEmpleado();
+					ConsultarUsuariosAdministrador frame = new ConsultarUsuariosAdministrador();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

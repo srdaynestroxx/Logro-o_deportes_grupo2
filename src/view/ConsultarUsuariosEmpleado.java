@@ -55,7 +55,7 @@ public class ConsultarUsuariosEmpleado extends JFrame {
 		contentPane.add(scrollPane);
 
 		tableModel = new DefaultTableModel(
-				new Object[] { "DNI", "Nombre", "Apellido", "Rol", "Mail", "Telefono", "Contraseña" }, 0);
+				new Object[] { "DNI", "Nombre", "Apellido", "Rol", "Mail", "Telefono" }, 0);
 		table = new JTable(tableModel);
 		scrollPane.setViewportView(table);
 		Controlador.Coordinador.mostrarDatosUsuarioEmpleado(tableModel);
