@@ -1,5 +1,7 @@
 package Controlador;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -42,7 +44,7 @@ import view.GestionReserva;
 import view.Menu;
 import view.MenuEmpleado;
 
-public class Coordinador {
+public class Coordinador implements ActionListener{
 
 	ConnectBDD.Connect connect = new ConnectBDD.Connect();
 
@@ -424,6 +426,12 @@ public class Coordinador {
 			JOptionPane.showMessageDialog(GestionReserva.table, "Ha ocurrido un error al importar o se ha cancelado la operación.");
 
 		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
