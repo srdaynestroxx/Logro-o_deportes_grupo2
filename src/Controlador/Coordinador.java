@@ -148,6 +148,17 @@ public class Coordinador implements ActionListener {
 			System.out.println("Error al escribir en el archivo. " + e.getMessage());
 		}
 	}
+	
+	
+	public static void cargarFicheroBinario (JButton btnCargarCopia) throws SQLException {
+		
+		Connect admin = new Connect();
+		Connect emp = new Connect();
+		ArrayList<Empleado> empleado = emp.cargarEmpleado();
+		ArrayList<Administrador> administrador = admin.cargarAdmins();
+		
+		
+	}
 
 	public static void InicioSesion(JButton btnIniciarSesion, JTextField textFieldDNI,
 			JPasswordField passwordFieldContraseña) throws SQLException {
