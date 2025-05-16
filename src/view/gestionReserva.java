@@ -67,7 +67,7 @@ public class gestionReserva extends JFrame {
 		contentPane.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(231, 35, 276, 323);
+		scrollPane.setBounds(256, 35, 276, 323);
 		contentPane.add(scrollPane);
 
 		tableModel = new DefaultTableModel(new Object[] { "DNI_Persona", "Sesión_Código" }, 0);
@@ -97,7 +97,7 @@ public class gestionReserva extends JFrame {
 				}
 			}
 		});
-		btnImportarXML.setBounds(563, 92, 166, 21);
+		btnImportarXML.setBounds(553, 92, 166, 21);
 		contentPane.add(btnImportarXML);
 
 		JButton btnExportarSesiones = new JButton("Exportar Sesiones");
@@ -113,7 +113,7 @@ public class gestionReserva extends JFrame {
 				}
 			}
 		});
-		btnExportarSesiones.setBounds(563, 123, 166, 21);
+		btnExportarSesiones.setBounds(553, 123, 166, 21);
 		contentPane.add(btnExportarSesiones);
 
 		JButton btnEditarReserva = new JButton("Actualizar Reservas");
@@ -123,7 +123,7 @@ public class gestionReserva extends JFrame {
 				JOptionPane.showMessageDialog(btnEditarReserva, "Se han actualizado las reservas.");
 			}
 		});
-		btnEditarReserva.setBounds(563, 154, 166, 21);
+		btnEditarReserva.setBounds(553, 154, 166, 21);
 		contentPane.add(btnEditarReserva);
 
 		JButton btnEliminarReserva = new JButton("Eliminar Reserva");
@@ -133,7 +133,7 @@ public class gestionReserva extends JFrame {
 				JOptionPane.showMessageDialog(btnEliminarReserva, "Se ha eliminado la reserva.");
 			}
 		});
-		btnEliminarReserva.setBounds(563, 185, 166, 21);
+		btnEliminarReserva.setBounds(553, 185, 166, 21);
 		contentPane.add(btnEliminarReserva);
 
 		// ORDENAR ALFABETICAMENTE
@@ -143,7 +143,7 @@ public class gestionReserva extends JFrame {
 		// FILTRO
 		JComboBox filtroCombo = new JComboBox();
 		filtroCombo.setModel(new DefaultComboBoxModel(new String[] { "Filtrar", "DNI_Persona", "Sesión_Código" }));
-		filtroCombo.setBounds(10, 38, 96, 21);
+		filtroCombo.setBounds(10, 38, 113, 21);
 		contentPane.add(filtroCombo);
 
 		textField = new JTextField();
@@ -169,7 +169,7 @@ public class gestionReserva extends JFrame {
 				});
 			}
 		});
-		textField.setBounds(116, 39, 96, 19);
+		textField.setBounds(133, 39, 102, 21);
 		contentPane.add(textField);
 		textField.setColumns(10);
 	}
