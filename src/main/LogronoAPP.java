@@ -27,10 +27,13 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import ConnectBDD.Connect;
+import view.ConsultarUsuariosAdministrador;
 import view.GestionReserva;
 
 public class LogronoAPP {
 
 	public static void main(String[] args) throws SQLException, ParserConfigurationException, TransformerException {
+		new view.InicioSesion().setVisible(true);
+
 	}
 }
