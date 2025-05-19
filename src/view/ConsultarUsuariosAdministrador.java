@@ -3,6 +3,8 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import ConnectBDD.Connect;
+import Controlador.Coordinador;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -12,6 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
@@ -42,6 +45,7 @@ public class ConsultarUsuariosAdministrador extends JFrame {
 	 * Create the frame.
 	 */
 	public ConsultarUsuariosAdministrador() {
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 460);
 		contentPane = new JPanel();
@@ -73,7 +77,15 @@ public class ConsultarUsuariosAdministrador extends JFrame {
 		JButton btnCargarCopia = new JButton("Cargar copia de seguridad");
 		btnCargarCopia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+			try {
+				Coordinador.cargarFicheroBinario(tableModel);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			}
 		});
 		btnCargarCopia.setBounds(348, 392, 166, 21);

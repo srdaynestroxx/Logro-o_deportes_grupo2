@@ -1,6 +1,8 @@
 package model;
 
-abstract class Persona {
+import java.io.Serializable;
+
+abstract class Persona implements Serializable {
 	
 	private String DNI;
 	private String nombre;

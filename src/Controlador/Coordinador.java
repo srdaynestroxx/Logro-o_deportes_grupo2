@@ -2,11 +2,16 @@ package Controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,11 +45,12 @@ import model.Administrador;
 import model.Empleado;
 import model.Reserva;
 import model.Sesion;
+import view.ConsultarUsuariosAdministrador;
 import view.GestionReserva;
 import view.Menu;
 import view.MenuEmpleado;
 
-public class Coordinador implements ActionListener{
+public class Coordinador implements ActionListener {
 
 	ConnectBDD.Connect connect = new ConnectBDD.Connect();
 
@@ -141,10 +147,7 @@ public class Coordinador implements ActionListener{
 
 			// Escribimos los objetos en el archivo.
 			for (int i = 0; i < empleado.size(); i++) {
-				escribir.writeObject(empleado.get(i));
-			}
-			for (int i = 0; i < administrador.size(); i++) {
-				escribir.writeObject(administrador.get(i));
+				escribir.writeObject(empleado);
 			}
 
 			// Cerramos los objetos para no consumir recursos.
@@ -154,6 +157,40 @@ public class Coordinador implements ActionListener{
 		} catch (Exception e) {
 			System.out.println("Error al escribir en el archivo. " + e.getMessage());
 		}
+	}
+
+	public static void cargarFicheroBinario(DefaultTableModel tableModel) throws IOException, ClassNotFoundException {
+
+
+	    File archivo = new File(exploradorArchivosBinario());
+        try {
+            FileInputStream fis = new FileInputStream(archivo);
+            ObjectInputStream leer;
+            
+            while (fis.available() > 0) {
+                leer = new ObjectInputStream(fis);
+                
+                ArrayList<Empleado> Empleado = (ArrayList<Empleado>) leer.readObject();
+                
+                System.out.println(Empleado);
+                
+                ConsultarUsuariosAdministrador consultar = new ConsultarUsuariosAdministrador();
+                
+                	tableModel.setRowCount(0);
+                    for (int i = 0; i < Empleado.size();i++) {
+                        tableModel.addRow(new Object[] { Empleado.get(i).getDNI(), Empleado.get(i).getNombre(),
+                                Empleado.get(i).getApellido(), Empleado.get(i).getRol(), Empleado.get(i).getMail(), Empleado.get(i).getTelefono(),
+                                Empleado.get(i).getContrasena() });
+                    }
+
+                	}
+            
+        } catch (Exception e) {
+            System.out.println("Error al leer el archivo. " + e.getMessage());
+
+        }
+		    
+
 	}
 
 	public static void InicioSesion(JButton btnIniciarSesion, JTextField textFieldDNI,
@@ -245,11 +282,11 @@ public class Coordinador implements ActionListener{
 		String filepath = "";
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("XML File", "xml");
 		JFileChooser selector = new JFileChooser();
-		
+
 		selector.setFileFilter(filter);
 		selector.setSelectedFile(new File("*.xml"));
 		selector.setCurrentDirectory(new File("./src/archivosXML-TXT/XML"));
-		
+
 		int result = selector.showOpenDialog(selector);
 		if (result == JFileChooser.APPROVE_OPTION) {
 
@@ -259,16 +296,16 @@ public class Coordinador implements ActionListener{
 		}
 		return filepath;
 	}
-	
+
 	public static String exploradorArchivosBinario() {
 		String filepath = "";
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("DAT File", "dat");
 		JFileChooser selector = new JFileChooser();
-		
+
 		selector.setFileFilter(filter);
 		selector.setSelectedFile(new File("*.dat"));
 		selector.setCurrentDirectory(new File("./src/backupUsuarios"));
-		
+
 		int result = selector.showOpenDialog(selector);
 		if (result == JFileChooser.APPROVE_OPTION) {
 
@@ -367,7 +404,7 @@ public class Coordinador implements ActionListener{
 			aforo.appendChild(document.createTextNode(rs.getString("Aforo")));
 			Element piscina = document.createElement("piscina");
 			piscina.appendChild(document.createTextNode(rs.getString("Actividad_Codigo")));
-			
+
 			root.appendChild(sesion);
 			sesion.appendChild(codigo);
 			sesion.appendChild(fecha);
@@ -423,7 +460,8 @@ public class Coordinador implements ActionListener{
 		}
 
 		catch (Exception spe) {
-			JOptionPane.showMessageDialog(GestionReserva.table, "Ha ocurrido un error al importar o se ha cancelado la operación.");
+			JOptionPane.showMessageDialog(GestionReserva.table,
+					"Ha ocurrido un error al importar o se ha cancelado la operación.");
 
 		}
 	}
@@ -431,7 +469,7 @@ public class Coordinador implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
