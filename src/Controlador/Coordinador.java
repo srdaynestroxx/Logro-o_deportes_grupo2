@@ -132,25 +132,16 @@ public class Coordinador implements ActionListener {
 		ArrayList<Empleado> empleado = emp.cargarEmpleado();
 		ArrayList<Administrador> administrador = admin.cargarAdmins();
 
-		// Creamos un objeto de tipo fila para asignarle un archivo
 		File archivo = new File(exploradorArchivosBinario());
 
 		try {
-			// Para poder escribir utilizaremos un FileOutputStream pasandole
-			// como referencia el archivo de tipo File.
 			FileOutputStream fos = new FileOutputStream(archivo);
-
-			// Y crearemos también una instancia del tipo ObjectOutputStream
-			// al que le pasaremos por parámetro
-			// el objeto de tipo FileOutputStream
 			ObjectOutputStream escribir = new ObjectOutputStream(fos);
 
-			// Escribimos los objetos en el archivo.
 			for (int i = 0; i < empleado.size(); i++) {
 				escribir.writeObject(empleado);
 			}
 
-			// Cerramos los objetos para no consumir recursos.
 			escribir.close();
 			fos.close();
 
