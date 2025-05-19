@@ -453,7 +453,6 @@ public class Coordinador implements ActionListener {
 		catch (Exception spe) {
 			JOptionPane.showMessageDialog(GestionReserva.table,
 					"Ha ocurrido un error al importar o se ha cancelado la operación.");
-
 		}
 	}
 
