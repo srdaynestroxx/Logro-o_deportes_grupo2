@@ -6,3 +6,6 @@
 /main/
 /archivosXML-TXT/
 /ConnectBDD/
+/Logs/
+/logs/
+.classpath

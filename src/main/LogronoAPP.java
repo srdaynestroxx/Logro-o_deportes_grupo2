@@ -29,6 +29,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import ConnectBDD.Connect;
+import logs.Logs;
 import view.ConsultarUsuariosAdministrador;
 import view.GestionReserva;
 
@@ -36,7 +37,7 @@ import view.GestionReserva;
  * Clase principal encargada de iniciar el programa.
  */
 public class LogronoAPP {
-
+	public final static Logs logger = new Logs();
 	/**
 	 * Constructor vacio para LogronoAPP.
 	 */
@@ -51,7 +52,12 @@ public class LogronoAPP {
 	 * @throws TransformerException Devuelve error en caso de fallar en el transformer.
 	 */
 	public static void main(String[] args) throws SQLException, ParserConfigurationException, TransformerException {
+		// Visualizar ventana de Inicio de Sesion.
 		new view.InicioSesion().setVisible(true);
+		try (logger) {
 
+			logger.logSession("Aplicación iniciada");
+
+		}
 	}
 }

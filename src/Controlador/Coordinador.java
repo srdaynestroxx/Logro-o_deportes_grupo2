@@ -43,6 +43,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import ConnectBDD.Connect;
+import logs.Logs;
+import main.LogronoAPP;
 import model.Administrador;
 import model.Empleado;
 import model.Reserva;
@@ -248,6 +250,12 @@ public class Coordinador implements ActionListener {
 				Menu ventana = new Menu();
 				ventana.setVisible(true);
 				enlista = true;
+				
+				try (main.LogronoAPP.logger) {
+
+					main.LogronoAPP.logger.logSession("Inicio de sesión como administrador.");
+
+				}
 
 			} else
 				for (int b = 0; b < con.cargarEmpleado().size(); b++) {
@@ -262,13 +270,23 @@ public class Coordinador implements ActionListener {
 						ventana2.setVisible(true);
 						enlista = true;
 
+						try (main.LogronoAPP.logger) {
+
+							main.LogronoAPP.logger.logSession("Inicio de sesión como empleado.");
+
+						}
 					}
 
 				}
 		}
 		if (enlista == false) {
 			JOptionPane.showMessageDialog(null, "Las credenciales introducidas no son correctas.");
+			
+			try (main.LogronoAPP.logger) {
 
+				main.LogronoAPP.logger.logSession("Credenciales erroneas.");
+
+			}
 		}
 	}
 

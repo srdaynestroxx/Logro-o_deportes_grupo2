@@ -7,6 +7,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import logs.Logs;
+
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -57,6 +60,12 @@ public class Menu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new ConsultarUsuariosAdministrador().setVisible(true);
 		        Menu.this.dispose();
+		        
+		        try (main.LogronoAPP.logger) {
+
+					main.LogronoAPP.logger.logSession("Ventana 'Consultar Usuarios' abierta (Menu cerrado).");
+
+				}
 			}
 		});
 		contentPane.add(btnConsultarUsuarios);
@@ -66,6 +75,12 @@ public class Menu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new GestionReserva().setVisible(true);
 		        Menu.this.dispose();
+		        
+		        try (main.LogronoAPP.logger) {
+
+					main.LogronoAPP.logger.logSession("Ventana 'Gestionar Reservas' abierta (Menu cerrado).");
+
+				}
 			}
 		});
 		contentPane.add(btnGestionarReservas);
