@@ -1,5 +1,7 @@
 package view;
-
+/**
+ * @author Grupo2 - Logroño Deportes
+ */
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import ConnectBDD.Connect;
@@ -18,15 +20,28 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
+/**
+ * Clase para que los Empleados consulten los usuarios.
+ */
 public class ConsultarUsuariosEmpleado extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	/**
+	 * JPanel ConsultarUsuariosEmpleado.
+	 */
 	private JPanel contentPane;
+	/**
+	 * Tabla ConsultarUsuariosEmpleado.
+	 */
 	private JTable table;
+	/**
+	 * DTM ConsultarUsuariosEmpleado.
+	 */
 	public DefaultTableModel tableModel;
 
 	/**
 	 * Launch the application.
+	 * @param args Parametro para argumentos de java.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

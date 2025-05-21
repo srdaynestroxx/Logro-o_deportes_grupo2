@@ -1,5 +1,7 @@
 package view;
-
+/**
+ * @author Grupo2 - Logroño Deportes
+ */
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import ConnectBDD.Connect;
@@ -28,16 +30,28 @@ import javax.swing.RowFilter;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
+/**
+ * Clase para que los Empleados consulten reservas.
+ */
 public class ConsultarReserva extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	/**
+	 * JPanel ConsultarReserva
+	 */
 	private JPanel contentPane;
+	/**
+	 * Tabla ConsultarReserva.
+	 */
 	public static JTable table;
+	/**
+	 * DTM ConsultarReserva.
+	 */
 	public DefaultTableModel tableModel;
 
 	/**
 	 * Launch the application.
+	 * @param args Parametro para argumentos de java.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

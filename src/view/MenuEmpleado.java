@@ -1,5 +1,7 @@
 package view;
-
+/**
+ * @author Grupo2 - Logroño Deportes
+ */
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,13 +12,20 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Clase encargada de mostrar el menu para Empleados.
+ */
 public class MenuEmpleado extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	/**
+	 * JPanel MenuEmpleado.
+	 */
 	private JPanel contentPane;
 
 	/**
 	 * Launch the application.
+	 * @param args Parametro para argumentos de java.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

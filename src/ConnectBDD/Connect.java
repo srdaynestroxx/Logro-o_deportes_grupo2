@@ -1,5 +1,7 @@
 package ConnectBDD;
-
+/**
+ * @author Grupo2 - Logroño Deportes
+ */
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -12,8 +14,19 @@ import model.Empleado;
 import model.Reserva;
 import model.Sesion;
 
+/**
+ * Clase encargada de la conexión con la base de datos.
+ */
 public class Connect {
 
+	/**
+	 * Constructor vacio para Connect
+	 */
+	public Connect() {}
+	/**
+	 * Método encargado de realizar la conexión con la base de datos.
+	 * @return El conector de la base de datos.
+	 */
 	public Connection conexion() {
 
 		String url = "jdbc:mysql://localhost:3306/LOGRONO";
@@ -35,6 +48,11 @@ public class Connect {
 		return con;
 	}
 
+	/**
+	 * Método encargado de cargar los administradores desde la base de datos.
+	 * @return Devuelve un ArrayList que contiene los administradores.
+	 * @throws SQLException Devuelve el posible error de SQL.
+	 */
 //CARGAR ADMINISTRADORES
 	public ArrayList<Administrador> cargarAdmins() throws SQLException {
 
@@ -67,6 +85,11 @@ public class Connect {
 		return administradores;
 	}
 
+	/**
+	 * Método encargado de cargar los empleados desde la base de datos.
+	 * @return Devuelve un ArrayList que contiene los empleados.
+	 * @throws SQLException Devuelve el posible error de SQL.
+	 */
 //CARGAR EMPLEADOS
 	public ArrayList<Empleado> cargarEmpleado() throws SQLException {
 
@@ -99,6 +122,11 @@ public class Connect {
 		return empleados;
 	}
 
+	/**
+	 * Método encargado de cargar las reservas de la base de datos.
+	 * @return Devuelve un ArrayList que contiene las reservas.
+	 * @throws SQLException Devuelve el posible error de SQL.
+	 */
 //CARGAR RESERVAS
 	public ArrayList<Reserva> cargarReserva() throws SQLException {
 
@@ -126,6 +154,11 @@ public class Connect {
 		return reservas;
 	}
 
+	/**
+	 * Método encargado de cargar las sesiones de la base de datos.
+	 * @return Devuelve un ArrayList que contiene las sesiones.
+	 * @throws SQLException Devuelve el posible error de SQL.
+	 */
 //CARGAR SESIONES
 	public ArrayList<Sesion> cargarSesion() throws SQLException {
 

@@ -1,5 +1,7 @@
 package view;
-
+/**
+ * @author Grupo2 - Logroño Deportes
+ */
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -15,16 +17,32 @@ import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
+/**
+ * Clase encargada de realizar el inicio de sesion
+ */
 public class InicioSesion extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	/**
+	 * JPanel InicioSesion.
+	 */
 	private JPanel contentPane;
+	/**
+	 * JTextField InicioSesion.
+	 */
 	private JTextField textFieldDNI;
+	/**
+	 * JLabel InicioSesion.
+	 */
 	private JLabel lblImagen;
+	/**
+	 * JPasswordField InicioSesion.
+	 */
 	private JPasswordField passwordFieldContraseña;
 
 	/**
 	 * Launch the application.
+	 * @param args Parametro para argumentos de java.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

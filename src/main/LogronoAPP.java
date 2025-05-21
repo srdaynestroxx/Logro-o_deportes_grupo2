@@ -1,5 +1,7 @@
 package main;
-
+/**
+ * @author Grupo2 - Logroño Deportes
+ */
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -30,8 +32,24 @@ import ConnectBDD.Connect;
 import view.ConsultarUsuariosAdministrador;
 import view.GestionReserva;
 
+/**
+ * Clase principal encargada de iniciar el programa.
+ */
 public class LogronoAPP {
 
+	/**
+	 * Constructor vacio para LogronoAPP.
+	 */
+	public LogronoAPP() {
+	}
+	
+	/**
+	 * Método encargado de hacer visible el inicio de sesión y asi iniciar el programa.
+	 * @param args Parametro de los argumentos de java.
+	 * @throws SQLException Devuelve el posible error de SQL.
+	 * @throws ParserConfigurationException Devuelve error en caso de fallar al parsear.
+	 * @throws TransformerException Devuelve error en caso de fallar en el transformer.
+	 */
 	public static void main(String[] args) throws SQLException, ParserConfigurationException, TransformerException {
 		new view.InicioSesion().setVisible(true);
 

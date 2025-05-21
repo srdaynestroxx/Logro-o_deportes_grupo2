@@ -1,5 +1,7 @@
 package view;
-
+/**
+ * @author Grupo2 - Logroño Deportes
+ */
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import ConnectBDD.Connect;
@@ -30,16 +32,32 @@ import javax.swing.RowFilter;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * Clase para que los Administradores gestionen las reservas.
+ */
 public class GestionReserva extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	/**
+	 * JPanel GestionReserva.
+	 */
 	private JPanel contentPane;
+	/**
+	 * Tabla GestionReserva.
+	 */
 	public static JTable table;
+	/**
+	 * DTM GestionReserva.
+	 */
 	public DefaultTableModel tableModel;
+	/**
+	 * JTextField GestionReserva.
+	 */
 	private JTextField textField;
 
 	/**
 	 * Launch the application.
+	 * @param args Parametro para argumentos de java.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
