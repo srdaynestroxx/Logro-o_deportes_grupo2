@@ -1,1 +1,0 @@
-INSERT INTO reserva (DNI_Persona, Sesion_Codigo) VALUES ('11122233A', 1);

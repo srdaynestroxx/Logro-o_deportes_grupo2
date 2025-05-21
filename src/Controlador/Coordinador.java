@@ -1,6 +1,7 @@
 package Controlador;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
@@ -51,13 +52,16 @@ import view.Menu;
 import view.MenuEmpleado;
 
 public class Coordinador implements ActionListener {
-
+	
+	
 	ConnectBDD.Connect connect = new ConnectBDD.Connect();
 
-	public Coordinador(Administrador paramAdmin, ConnectBDD.Connect paramConnect) {
+	public Coordinador(Administrador paramAdmin, ConnectBDD.Connect paramConnect) throws SecurityException, IOException{
 		this.myConnect = paramConnect;
-
+		
+		
 	}
+	
 
 	Connect myConnect = new Connect();
 	Administrador myAdministrador = new Administrador();
@@ -81,8 +85,9 @@ public class Coordinador implements ActionListener {
 	public static void mostrarDatosUsuarioAdministrador(DefaultTableModel tablemodel) {
 
 		Connect perDb = new Connect();
-
+	
 		try {
+			
 			ArrayList<Administrador> adminList = perDb.cargarAdmins();
 			ArrayList<Empleado> empleList = perDb.cargarEmpleado();
 
@@ -104,10 +109,13 @@ public class Coordinador implements ActionListener {
 
 	}
 
-	public static void mostrarDatosUsuarioEmpleado(DefaultTableModel tablemodel) {
+	public static void mostrarDatosUsuarioEmpleado(DefaultTableModel tablemodel) throws SecurityException, IOException {
 
+	
 		Connect perDb = new Connect();
 
+		
+		
 		try {
 			ArrayList<Empleado> empleList = perDb.cargarEmpleado();
 

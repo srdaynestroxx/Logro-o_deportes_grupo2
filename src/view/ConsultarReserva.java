@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import ConnectBDD.Connect;
 import main.LogronoAPP;
+import view.GestionReserva;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -35,19 +36,21 @@ public class ConsultarReserva extends JFrame {
 	private JPanel contentPane;
 	public static JTable table;
 	public DefaultTableModel tableModel;
-
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				
 				try {
-					GestionReserva frame = new GestionReserva();
+					ConsultarReserva frame = new ConsultarReserva();
 					frame.setVisible(true);
 				} catch (Exception e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
 			}
 		});
 	}
