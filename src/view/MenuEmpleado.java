@@ -57,6 +57,12 @@ public class MenuEmpleado extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new ConsultarUsuariosEmpleado().setVisible(true);
 		        MenuEmpleado.this.dispose();
+		        
+		        try (main.LogronoAPP.logger) {
+
+					main.LogronoAPP.logger.logSession("Ventana 'Consultar Usuarios' abierta (Menu cerrado).");
+
+				}
 			}
 		});
 		contentPane.add(btnConsultarUsuarios);
@@ -66,6 +72,12 @@ public class MenuEmpleado extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new ConsultarReserva().setVisible(true);
 		        MenuEmpleado.this.dispose();
+		        
+		        try (main.LogronoAPP.logger) {
+
+					main.LogronoAPP.logger.logSession("Ventana 'Consultar Reservas' abierta (Menu cerrado).");
+
+				}
 			}
 		});
 		contentPane.add(btnGestionarReservas);

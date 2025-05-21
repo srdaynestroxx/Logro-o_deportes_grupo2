@@ -93,6 +93,10 @@ public class ConsultarReserva extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new MenuEmpleado().setVisible(true);
 				ConsultarReserva.this.dispose();
+				
+				 try (main.LogronoAPP.logger) {
+						main.LogronoAPP.logger.logSession("Se ha vuelto al menú.");
+					}
 			}
 		});
 		btnVolver.setBounds(10, 392, 85, 21);
