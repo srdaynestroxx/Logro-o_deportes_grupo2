@@ -72,7 +72,7 @@ public class InicioSesion extends JFrame {
 		contentPane.add(lblContraseña);
 
 		lblImagen = new JLabel("");
-		lblImagen.setIcon(new ImageIcon("C:\\Users\\1AW3-24\\git\\Logro-o_deportes_grupo2\\src\\imagenes\\logoLD.png"));
+		lblImagen.setIcon(new ImageIcon("C:\\Users\\1AW3-2\\git\\Logro-o_deportes_grupo\\src\\imagenes\\logoLD.png"));
 		lblImagen.setBounds(11, 11, 214, 110);
 		contentPane.add(lblImagen);
 
@@ -81,7 +81,7 @@ public class InicioSesion extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Controlador.Coordinador.InicioSesion(btnIniciarSesion, textFieldDNI, passwordFieldContraseña);
-			        InicioSesion.this.dispose();
+					InicioSesion.this.dispose();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

@@ -90,10 +90,11 @@ public class GestionReserva extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Coordinador.importarXML();
-					
+
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(btnImportarXML, "Ha ocurrido un error al importar o se ha cancelado la operación.");
+					JOptionPane.showMessageDialog(btnImportarXML,
+							"Ha ocurrido un error al importar o se ha cancelado la operación.");
 				}
 			}
 		});
@@ -109,7 +110,8 @@ public class GestionReserva extends JFrame {
 							"Se han exportado las sesiones a la ruta especificada.");
 				} catch (ParserConfigurationException | TransformerException | SQLException e1) {
 					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(btnExportarSesiones, "Ha ocurrido un error al exportar o se ha cancelado la operación.");
+					JOptionPane.showMessageDialog(btnExportarSesiones,
+							"Ha ocurrido un error al exportar o se ha cancelado la operación.");
 				}
 			}
 		});

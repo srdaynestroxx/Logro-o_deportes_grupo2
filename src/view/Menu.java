@@ -42,21 +42,21 @@ public class Menu extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(1, 0, 0, 0));
-		
+
 		JButton btnConsultarUsuarios = new JButton("Consultar Usuarios");
 		btnConsultarUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new ConsultarUsuariosAdministrador().setVisible(true);
-		        Menu.this.dispose();
+				Menu.this.dispose();
 			}
 		});
 		contentPane.add(btnConsultarUsuarios);
-		
+
 		JButton btnGestionarReservas = new JButton("Gestionar Reservas");
 		btnGestionarReservas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new GestionReserva().setVisible(true);
-		        Menu.this.dispose();
+				Menu.this.dispose();
 			}
 		});
 		contentPane.add(btnGestionarReservas);

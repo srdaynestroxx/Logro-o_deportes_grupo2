@@ -68,7 +68,7 @@ public class ConsultarUsuariosAdministrador extends JFrame {
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new Menu().setVisible(true);
-		        ConsultarUsuariosAdministrador.this.dispose();
+				ConsultarUsuariosAdministrador.this.dispose();
 			}
 		});
 		btnVolver.setBounds(10, 392, 85, 21);
@@ -77,15 +77,15 @@ public class ConsultarUsuariosAdministrador extends JFrame {
 		JButton btnCargarCopia = new JButton("Cargar copia de seguridad");
 		btnCargarCopia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			try {
-				Coordinador.cargarFicheroBinario(tableModel);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (ClassNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+				try {
+					Coordinador.cargarFicheroBinario(tableModel);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnCargarCopia.setBounds(348, 392, 166, 21);

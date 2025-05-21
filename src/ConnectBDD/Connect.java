@@ -16,7 +16,7 @@ public class Connect {
 
 	public Connection conexion() {
 
-		String url = "jdbc:mysql://localhost:3306/LOGRONO";
+		String url = "jdbc:mysql://localhost:3306/logronodeportes";
 
 		String username = "root";
 
