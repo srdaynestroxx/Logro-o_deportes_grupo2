@@ -102,7 +102,7 @@ public class ConsultarUsuariosEmpleado extends JFrame {
 		btnCargarCopia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			try {
-				Coordinador.cargarFicheroBinario(tableModel);
+				Coordinador.cargarFicheroBinario(tableModel, btnCargarCopia);
 				
 				 try (main.LogronoAPP.logger) {
 						main.LogronoAPP.logger.logSession("Se ha usado la opción 'Cargar copia de seguridad'.");
@@ -144,7 +144,6 @@ public class ConsultarUsuariosEmpleado extends JFrame {
 						}
 				}
 				System.out.println("Copia de seguridad realizada");
-				JOptionPane.showMessageDialog(btnCopiaSeguridad, "Se han guardado los datos en un fichero binario.");
 			}
 		});
 		btnCopiaSeguridad.setBounds(524, 392, 205, 21);

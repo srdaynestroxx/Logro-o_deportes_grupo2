@@ -103,7 +103,7 @@ public class ConsultarUsuariosAdministrador extends JFrame {
 		btnCargarCopia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			try {
-				Coordinador.cargarFicheroBinario(tableModel);
+				Coordinador.cargarFicheroBinario(tableModel, btnCargarCopia);
 				
 				 try (main.LogronoAPP.logger) {
 						main.LogronoAPP.logger.logSession("Se ha usado la opción 'Cargar copia de seguridad'.");
@@ -112,6 +112,7 @@ public class ConsultarUsuariosAdministrador extends JFrame {
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+
 				 try (main.LogronoAPP.logger) {
 						main.LogronoAPP.logger.logError("Error con Input u Output", e1);
 					}
@@ -141,12 +142,13 @@ public class ConsultarUsuariosAdministrador extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+					JOptionPane.showMessageDialog(btnCopiaSeguridad, "Ha ocurrido un error al realizar la copia de seguridad o se ha cancelado la operación.");
+
 					 try (main.LogronoAPP.logger) {
 							main.LogronoAPP.logger.logError("Error con la base de datos.", e1);
 						}
 				}
 				System.out.println("Copia de seguridad realizada");
-				JOptionPane.showMessageDialog(btnCopiaSeguridad, "Se han guardado los datos en un fichero binario.");
 			}
 		});
 		btnCopiaSeguridad.setBounds(524, 392, 205, 21);

@@ -1,11 +1,4 @@
-/view/
+/test/
 /Controlador/
-/backupUsuarios/
-/imagenes/
-/model/
-/main/
-/archivosXML-TXT/
 /ConnectBDD/
-/Logs/
-/logs/
-.classpath
+/view/

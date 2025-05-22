@@ -187,7 +187,10 @@ public class Coordinador implements ActionListener {
 			escribir.close();
 			fos.close();
 
+			JOptionPane.showMessageDialog(btnCopiaSeguridad, "Se han guardado los datos en un fichero binario.");
+			
 		} catch (Exception e) {
+			JOptionPane.showMessageDialog(btnCopiaSeguridad, "Ha ocurrido un error al realizar la copia de seguridad o se ha cancelado la operación.");
 			System.out.println("Error al escribir en el archivo. " + e.getMessage());
 			 try (main.LogronoAPP.logger) {
 					main.LogronoAPP.logger.logError("Error realizando la operación.", e);
@@ -201,7 +204,7 @@ public class Coordinador implements ActionListener {
 	 * @throws IOException Devuelve la posible excepcion IO.
 	 * @throws ClassNotFoundException Devuelve el error en caso de no encontrar la clase.
 	 */
-	public static void cargarFicheroBinario(DefaultTableModel tableModel) throws IOException, ClassNotFoundException {
+	public static void cargarFicheroBinario(DefaultTableModel tableModel, JButton btnCargarCopia) throws IOException, ClassNotFoundException {
 
 
 	    File archivo = new File(exploradorArchivosBinario());
@@ -213,9 +216,7 @@ public class Coordinador implements ActionListener {
                 leer = new ObjectInputStream(fis);
                 
                 ArrayList<Empleado> Empleado = (ArrayList<Empleado>) leer.readObject();
-                
-                System.out.println(Empleado);
-                
+                                
                 ConsultarUsuariosAdministrador consultar = new ConsultarUsuariosAdministrador();
                 
                 	tableModel.setRowCount(0);
@@ -226,9 +227,10 @@ public class Coordinador implements ActionListener {
                     }
 
                 	}
+			JOptionPane.showMessageDialog(btnCargarCopia, "Se han cargado los datos desde un fichero binario.");
             
         } catch (Exception e) {
-            System.out.println("Error al leer el archivo. " + e.getMessage());
+            System.out.println();
             
 			 try (main.LogronoAPP.logger) {
 					main.LogronoAPP.logger.logError("Error realizando la operación.", e);
@@ -544,7 +546,7 @@ public class Coordinador implements ActionListener {
 			Connection con = conexion.conexion();
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			documento = builder.parse(new File(exploradorArchivos()));
-			NodeList nodeList = documento.getElementsByTagName("reserva");
+			NodeList nodeList = documento.getElementsByTagName("peticion");
 			for (int i = 0; i < nodeList.getLength(); i = i + 2) {
 				Node node = nodeList.item(i);
 				String reserva = node.getTextContent();
@@ -561,7 +563,7 @@ public class Coordinador implements ActionListener {
 						"Se ha importado el XML y se ha generado un archivo .txt.");
 				try {
 					FileWriter writer = new FileWriter(
-							"C:\\Users\\1AW3-24\\git\\Logro-o_deportes_grupo2\\src\\archivosXML-TXT\\TXT\\consulta.txt");
+							"src\\archivosXML-TXT\\TXT\\consulta.txt");
 					writer.write(consulta);
 					writer.close();
 				} catch (IOException e) {
