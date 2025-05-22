@@ -56,6 +56,7 @@ public class Logs implements AutoCloseable {
 			if (e != null) {
 				e.printStackTrace(errorLogger);
 			}
+			
 		} catch (IOException ioEx) {
 			System.err.println("No se pudo escribir en el archivo de errores: " + ioEx.getMessage());
 		}
