@@ -67,6 +67,10 @@ public class GestionReserva extends JFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					
+					 try (main.LogronoAPP.logger) {
+							main.LogronoAPP.logger.logError("Error cargando ventana.", e);
+						}
 				}
 			}
 		});
@@ -98,6 +102,10 @@ public class GestionReserva extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new Menu().setVisible(true);
 				GestionReserva.this.dispose();
+				
+				 try (main.LogronoAPP.logger) {
+						main.LogronoAPP.logger.logSession("Se ha vuelto al menu.");
+					}
 			}
 		});
 		btnVolver.setBounds(10, 392, 85, 21);
@@ -109,9 +117,16 @@ public class GestionReserva extends JFrame {
 				try {
 					Coordinador.importarXML();
 					
+					 try (main.LogronoAPP.logger) {
+							main.LogronoAPP.logger.logSession("Se ha usado la opción de Importar XML.");
+						}
+					
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(btnImportarXML, "Ha ocurrido un error al importar o se ha cancelado la operación.");
+					 try (main.LogronoAPP.logger) {
+							main.LogronoAPP.logger.logError("Error con la base de datos.", e1);
+						}
 				}
 			}
 		});
@@ -125,9 +140,16 @@ public class GestionReserva extends JFrame {
 					Coordinador.exportarXML();
 					JOptionPane.showMessageDialog(btnExportarSesiones,
 							"Se han exportado las sesiones a la ruta especificada.");
+					
+					 try (main.LogronoAPP.logger) {
+							main.LogronoAPP.logger.logSession("Se ha usado la opción de 'Exportar Sesiones'.");
+						}
 				} catch (ParserConfigurationException | TransformerException | SQLException e1) {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(btnExportarSesiones, "Ha ocurrido un error al exportar o se ha cancelado la operación.");
+					 try (main.LogronoAPP.logger) {
+							main.LogronoAPP.logger.logError("Error al parsear / Error con el transformer / Error con la base de datos.", e1);
+						}
 				}
 			}
 		});
@@ -139,6 +161,10 @@ public class GestionReserva extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Coordinador.editarReserva();
 				JOptionPane.showMessageDialog(btnEditarReserva, "Se han actualizado las reservas.");
+				
+				 try (main.LogronoAPP.logger) {
+						main.LogronoAPP.logger.logSession("Se ha usado la opción 'Actualizar Reservas'.");
+					}
 			}
 		});
 		btnEditarReserva.setBounds(553, 154, 166, 21);
@@ -149,6 +175,10 @@ public class GestionReserva extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Coordinador.eliminarReserva();
 				JOptionPane.showMessageDialog(btnEliminarReserva, "Se ha eliminado la reserva.");
+				
+				 try (main.LogronoAPP.logger) {
+						main.LogronoAPP.logger.logSession("Se ha usado la opción 'Eliminar Reserva'.");
+					}
 			}
 		});
 		btnEliminarReserva.setBounds(553, 185, 166, 21);
@@ -185,6 +215,9 @@ public class GestionReserva extends JFrame {
 						return nombre.startsWith(searchText);
 					}
 				});
+				 try (main.LogronoAPP.logger) {
+						main.LogronoAPP.logger.logSession("Se ha filtrado por " + filtroCombo.getSelectedItem() + " con el siguiente campo: " + textField.getText());
+					}
 			}
 		});
 		textField.setBounds(133, 39, 102, 21);

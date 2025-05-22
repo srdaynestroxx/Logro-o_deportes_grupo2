@@ -127,6 +127,9 @@ public class Coordinador implements ActionListener {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			 try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logError("Error con la base de datos.", e);
+				}
 		}
 
 	}
@@ -152,6 +155,9 @@ public class Coordinador implements ActionListener {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			 try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logError("Error con la base de datos.", e);
+				}
 		}
 
 	}
@@ -183,6 +189,9 @@ public class Coordinador implements ActionListener {
 
 		} catch (Exception e) {
 			System.out.println("Error al escribir en el archivo. " + e.getMessage());
+			 try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logError("Error realizando la operación.", e);
+				}
 		}
 	}
 
@@ -220,6 +229,10 @@ public class Coordinador implements ActionListener {
             
         } catch (Exception e) {
             System.out.println("Error al leer el archivo. " + e.getMessage());
+            
+			 try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logError("Error realizando la operación.", e);
+				}
 
         }
 		    
@@ -308,6 +321,9 @@ public class Coordinador implements ActionListener {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			 try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logError("Error con la base de datos.", e);
+				}
 		}
 
 	}
@@ -338,6 +354,9 @@ public class Coordinador implements ActionListener {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			 try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logError("Error con la base de datos.", e);
+				}
 		}
 
 	}
@@ -413,6 +432,9 @@ public class Coordinador implements ActionListener {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			 try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logError("Error con la base de datos.", e);
+				}
 		}
 
 		int[] rows = GestionReserva.table.getSelectedRows();
@@ -450,6 +472,9 @@ public class Coordinador implements ActionListener {
 
 		} catch (SQLException ex) {
 			System.out.println("Error al actualizar los datos.");
+			 try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logError("Error con la base de datos.", ex);
+				}
 		}
 	}
 
@@ -542,6 +567,9 @@ public class Coordinador implements ActionListener {
 				} catch (IOException e) {
 					System.out.println("Error al generar el fichero .txt");
 					e.printStackTrace();
+					 try (main.LogronoAPP.logger) {
+							main.LogronoAPP.logger.logError("Error con Input u Output", e);
+						}
 				}
 			}
 		}
@@ -549,6 +577,9 @@ public class Coordinador implements ActionListener {
 		catch (Exception spe) {
 			JOptionPane.showMessageDialog(GestionReserva.table,
 					"Ha ocurrido un error al importar o se ha cancelado la operación.");
+			 try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logError("Error al realizar la operación.", spe);
+				}
 		}
 	}
 	

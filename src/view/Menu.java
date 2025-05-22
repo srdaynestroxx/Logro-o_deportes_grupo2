@@ -38,6 +38,9 @@ public class Menu extends JFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					 try (main.LogronoAPP.logger) {
+							main.LogronoAPP.logger.logError("Error cargando ventana.", e);
+						}
 				}
 			}
 		});

@@ -37,6 +37,9 @@ import view.GestionReserva;
  * Clase principal encargada de iniciar el programa.
  */
 public class LogronoAPP {
+	/**
+	 * Variable para generar logs.
+	 */
 	public final static Logs logger = new Logs();
 	/**
 	 * Constructor vacio para LogronoAPP.

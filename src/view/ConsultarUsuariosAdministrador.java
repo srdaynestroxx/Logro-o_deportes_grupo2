@@ -51,6 +51,12 @@ public class ConsultarUsuariosAdministrador extends JFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					
+					 try (main.LogronoAPP.logger) {
+
+							main.LogronoAPP.logger.logError("Error cargando ventana.", e);
+
+						}
 				}
 			}
 		});
@@ -84,6 +90,10 @@ public class ConsultarUsuariosAdministrador extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new Menu().setVisible(true);
 		        ConsultarUsuariosAdministrador.this.dispose();
+		        
+				 try (main.LogronoAPP.logger) {
+						main.LogronoAPP.logger.logSession("Se ha vuelto al menú.");
+					}
 			}
 		});
 		btnVolver.setBounds(10, 392, 85, 21);
@@ -94,12 +104,24 @@ public class ConsultarUsuariosAdministrador extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			try {
 				Coordinador.cargarFicheroBinario(tableModel);
+				
+				 try (main.LogronoAPP.logger) {
+						main.LogronoAPP.logger.logSession("Se ha usado la opción 'Cargar copia de seguridad'.");
+					}
+				 
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+				 try (main.LogronoAPP.logger) {
+						main.LogronoAPP.logger.logError("Error con Input u Output", e1);
+					}
+				 
 			} catch (ClassNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+				 try (main.LogronoAPP.logger) {
+						main.LogronoAPP.logger.logError("Error encontrando la clase", e1);
+					}
 			}
 			}
 		});
@@ -111,10 +133,17 @@ public class ConsultarUsuariosAdministrador extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Controlador.Coordinador.realizarFicheroBinario(btnCopiaSeguridad);
+					
+					 try (main.LogronoAPP.logger) {
+							main.LogronoAPP.logger.logSession("Se ha usado la opción 'Realizar copia de seguridad'.");
+						}
+					 
 				} catch (SQLException e1) {
-
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+					 try (main.LogronoAPP.logger) {
+							main.LogronoAPP.logger.logError("Error con la base de datos.", e1);
+						}
 				}
 				System.out.println("Copia de seguridad realizada");
 				JOptionPane.showMessageDialog(btnCopiaSeguridad, "Se han guardado los datos en un fichero binario.");

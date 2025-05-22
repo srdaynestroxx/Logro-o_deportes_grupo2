@@ -62,6 +62,10 @@ public class ConsultarReserva extends JFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					
+					 try (main.LogronoAPP.logger) {
+							main.LogronoAPP.logger.logError("Error cargando ventana.", e);
+						}
 				}
 			}
 		});
@@ -93,6 +97,10 @@ public class ConsultarReserva extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new MenuEmpleado().setVisible(true);
 				ConsultarReserva.this.dispose();
+				
+				 try (main.LogronoAPP.logger) {
+						main.LogronoAPP.logger.logSession("Se ha vuelto al menú.");
+					}
 			}
 		});
 		btnVolver.setBounds(10, 392, 85, 21);

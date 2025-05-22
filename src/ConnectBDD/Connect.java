@@ -43,6 +43,10 @@ public class Connect {
 			// TODO Auto-generated catch block
 			System.out.println("Error conectando a la base de datos");
 			e.printStackTrace();
+			
+			 try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logError("Error con la base de datos.", e);
+				}
 		}
 
 		return con;
@@ -80,6 +84,10 @@ public class Connect {
 		} catch (SQLException e) {
 			System.out.println("ERROR AÑADIENDO ADMINISTRADORES");
 			e.printStackTrace();
+			
+			 try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logError("Error con la base de datos.", e);
+				}
 		}
 
 		return administradores;
@@ -117,6 +125,10 @@ public class Connect {
 		} catch (SQLException e) {
 			System.out.println("ERROR AÑADIENDO EMPLEADOS");
 			e.printStackTrace();
+			
+			 try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logError("Error con la base de datos.", e);
+				}
 		}
 
 		return empleados;
@@ -149,6 +161,10 @@ public class Connect {
 		} catch (SQLException e) {
 			System.out.println("ERROR AÑADIENDO RESERVAS");
 			e.printStackTrace();
+			
+			 try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logError("Error con la base de datos.", e);
+				}
 		}
 
 		return reservas;
@@ -183,6 +199,10 @@ public class Connect {
 		} catch (SQLException e) {
 			System.out.println("ERROR AÑADIENDO SESIONES");
 			e.printStackTrace();
+			
+			 try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logError("Error con la base de datos.", e);
+				}
 		}
 
 		return sesiones;

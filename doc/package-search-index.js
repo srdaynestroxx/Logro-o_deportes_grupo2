@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ConnectBDD"},{"l":"Controlador"},{"l":"main"},{"l":"model"},{"l":"view"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ConnectBDD"},{"l":"Controlador"},{"l":"logs"},{"l":"main"},{"l":"model"},{"l":"view"}];updateSearchResults();

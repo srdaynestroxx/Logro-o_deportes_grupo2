@@ -52,6 +52,10 @@ public class InicioSesion extends JFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					
+					 try (main.LogronoAPP.logger) {
+							main.LogronoAPP.logger.logError("Error cargando ventana.", e);
+						}
 				}
 			}
 		});
@@ -100,9 +104,16 @@ public class InicioSesion extends JFrame {
 				try {
 					Controlador.Coordinador.InicioSesion(btnIniciarSesion, textFieldDNI, passwordFieldContraseña);
 			        InicioSesion.this.dispose();
+			        
+			        try (main.LogronoAPP.logger) {
+						main.LogronoAPP.logger.logSession("Sesión iniciada.");
+					}
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+					 try (main.LogronoAPP.logger) {
+							main.LogronoAPP.logger.logError("Error con la base de datos.", e1);
+						}
 				}
 			}
 		});
