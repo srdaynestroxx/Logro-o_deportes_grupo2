@@ -98,6 +98,10 @@ public class GestionReserva extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new Menu().setVisible(true);
 				GestionReserva.this.dispose();
+				
+				 try (main.LogronoAPP.logger) {
+						main.LogronoAPP.logger.logSession("Se ha vuelto al menu.");
+					}
 			}
 		});
 		btnVolver.setBounds(10, 392, 85, 21);
@@ -113,6 +117,10 @@ public class GestionReserva extends JFrame {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(btnImportarXML, "Ha ocurrido un error al importar o se ha cancelado la operación.");
 				}
+				
+				 try (main.LogronoAPP.logger) {
+						main.LogronoAPP.logger.logSession("Se ha usado la opción de Importar XML.");
+					}
 			}
 		});
 		btnImportarXML.setBounds(553, 92, 166, 21);
@@ -129,6 +137,9 @@ public class GestionReserva extends JFrame {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(btnExportarSesiones, "Ha ocurrido un error al exportar o se ha cancelado la operación.");
 				}
+				 try (main.LogronoAPP.logger) {
+						main.LogronoAPP.logger.logSession("Se ha usado la opción de 'Exportar Sesiones'.");
+					}
 			}
 		});
 		btnExportarSesiones.setBounds(553, 123, 166, 21);
@@ -139,6 +150,10 @@ public class GestionReserva extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Coordinador.editarReserva();
 				JOptionPane.showMessageDialog(btnEditarReserva, "Se han actualizado las reservas.");
+				
+				 try (main.LogronoAPP.logger) {
+						main.LogronoAPP.logger.logSession("Se ha usado la opción 'Actualizar Reservas'.");
+					}
 			}
 		});
 		btnEditarReserva.setBounds(553, 154, 166, 21);
@@ -149,6 +164,9 @@ public class GestionReserva extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Coordinador.eliminarReserva();
 				JOptionPane.showMessageDialog(btnEliminarReserva, "Se ha eliminado la reserva.");
+				 try (main.LogronoAPP.logger) {
+						main.LogronoAPP.logger.logSession("Se ha usado la opciçon 'Eliminar Reserva'.");
+					}
 			}
 		});
 		btnEliminarReserva.setBounds(553, 185, 166, 21);
@@ -185,6 +203,9 @@ public class GestionReserva extends JFrame {
 						return nombre.startsWith(searchText);
 					}
 				});
+				 try (main.LogronoAPP.logger) {
+						main.LogronoAPP.logger.logSession("Se ha filtrado por " + filtroCombo.getSelectedItem() + " con el siguiente campo: " + textField.getText());
+					}
 			}
 		});
 		textField.setBounds(133, 39, 102, 21);

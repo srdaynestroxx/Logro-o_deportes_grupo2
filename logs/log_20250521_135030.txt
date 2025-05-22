@@ -1,6 +1,0 @@
-[2025-05-21 13:50:30] INFO: === Nueva sesión iniciada: 20250521_135030 ===
-[2025-05-21 13:50:30] INFO: Aplicación iniciada
-[2025-05-21 13:50:30] INFO: Hola pixa
-[2025-05-21 13:50:39] INFO: Inicio de sesión como administrador.
-[2025-05-21 13:50:40] INFO: Ventana 'Gestionar Reservas' abierta (Menu cerrado).
-[2025-05-21 13:50:43] INFO: Ventana 'Consultar Usuarios' abierta (Menu cerrado).

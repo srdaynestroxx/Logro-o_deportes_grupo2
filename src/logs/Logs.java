@@ -12,7 +12,7 @@ public class Logs implements AutoCloseable {
 	public Logs() {
 		try {
 			String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-			File logDir = new File("loggers");
+			File logDir = new File("logs");
 			if (!logDir.exists()) {
 				logDir.mkdirs(); // Crear directorio si no existe
 			}

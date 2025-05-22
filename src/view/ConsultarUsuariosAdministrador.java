@@ -84,6 +84,10 @@ public class ConsultarUsuariosAdministrador extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new Menu().setVisible(true);
 		        ConsultarUsuariosAdministrador.this.dispose();
+		        
+		        try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logSession("Se ha vuelto al menú.");
+				}
 			}
 		});
 		btnVolver.setBounds(10, 392, 85, 21);
@@ -101,6 +105,10 @@ public class ConsultarUsuariosAdministrador extends JFrame {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			
+			 try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logSession("Se ha usado la opción 'Cargar copia de seguridad'.");
+				}
 			}
 		});
 		btnCargarCopia.setBounds(348, 392, 166, 21);
@@ -118,6 +126,10 @@ public class ConsultarUsuariosAdministrador extends JFrame {
 				}
 				System.out.println("Copia de seguridad realizada");
 				JOptionPane.showMessageDialog(btnCopiaSeguridad, "Se han guardado los datos en un fichero binario.");
+				
+				 try (main.LogronoAPP.logger) {
+						main.LogronoAPP.logger.logSession("Se ha usado la opción 'Realizar copia de seguridad'.");
+					}
 			}
 		});
 		btnCopiaSeguridad.setBounds(524, 392, 205, 21);
