@@ -1,0 +1,4 @@
+[2025-05-22 13:13:57] INFO: === Nueva sesión iniciada: 20250522_131357 ===
+[2025-05-22 13:13:57] INFO: Se ha usado la opción 'Cargar copia de seguridad'.
+[2025-05-22 13:14:00] INFO: Se ha usado la opción 'Cargar copia de seguridad'.
+[2025-05-22 13:14:05] INFO: Se ha usado la opción 'Realizar copia de seguridad'.

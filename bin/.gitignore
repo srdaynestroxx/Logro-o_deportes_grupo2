@@ -1,7 +1,4 @@
-/view/
+/test/
 /Controlador/
-/backupUsuarios/
-/imagenes/
-/model/
-/main/
-/archivosXML-TXT/
+/ConnectBDD/
+/view/

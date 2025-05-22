@@ -1,0 +1,2 @@
+[2025-05-22 12:18:23] INFO: === Nueva sesión iniciada: 20250522_121823 ===
+[2025-05-22 12:18:23] INFO: Se ha usado la opción de Importar XML.

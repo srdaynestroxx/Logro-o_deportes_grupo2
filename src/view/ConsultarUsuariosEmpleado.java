@@ -1,5 +1,7 @@
 package view;
-
+/**
+ * @author Grupo2 - Logroño Deportes
+ */
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import ConnectBDD.Connect;
@@ -18,15 +20,28 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
+/**
+ * Clase para que los Empleados consulten los usuarios.
+ */
 public class ConsultarUsuariosEmpleado extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	/**
+	 * JPanel ConsultarUsuariosEmpleado.
+	 */
 	private JPanel contentPane;
+	/**
+	 * Tabla ConsultarUsuariosEmpleado.
+	 */
 	private JTable table;
+	/**
+	 * DTM ConsultarUsuariosEmpleado.
+	 */
 	public DefaultTableModel tableModel;
 
 	/**
 	 * Launch the application.
+	 * @param args Parametro para argumentos de java.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -36,6 +51,12 @@ public class ConsultarUsuariosEmpleado extends JFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					
+					 try (main.LogronoAPP.logger) {
+
+							main.LogronoAPP.logger.logError("Error cargando ventana.", e);
+
+						}
 				}
 			}
 		});
@@ -68,6 +89,10 @@ public class ConsultarUsuariosEmpleado extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new MenuEmpleado().setVisible(true);
 		        ConsultarUsuariosEmpleado.this.dispose();
+		        
+		        try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logSession("Se ha vuelto al menú.");
+				}
 			}
 		});
 		btnVolver.setBounds(10, 392, 85, 21);
@@ -77,13 +102,24 @@ public class ConsultarUsuariosEmpleado extends JFrame {
 		btnCargarCopia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			try {
-				Coordinador.cargarFicheroBinario(tableModel);
+				Coordinador.cargarFicheroBinario(tableModel, btnCargarCopia);
+				
+				 try (main.LogronoAPP.logger) {
+						main.LogronoAPP.logger.logSession("Se ha usado la opción 'Cargar copia de seguridad'.");
+					}
+				 
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+				 try (main.LogronoAPP.logger) {
+						main.LogronoAPP.logger.logError("Error con Input u Output", e1);
+					}
 			} catch (ClassNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+				 try (main.LogronoAPP.logger) {
+						main.LogronoAPP.logger.logError("Error encontrando la clase", e1);
+					}
 			}
 			}
 		});
@@ -95,13 +131,19 @@ public class ConsultarUsuariosEmpleado extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Controlador.Coordinador.realizarFicheroBinario(btnCopiaSeguridad);
+					
+					 try (main.LogronoAPP.logger) {
+							main.LogronoAPP.logger.logSession("Se ha usado la opción 'Realizar copia de seguridad'.");
+						}
+					 
 				} catch (SQLException e1) {
-
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+					 try (main.LogronoAPP.logger) {
+							main.LogronoAPP.logger.logError("Error con la base de datos.", e1);
+						}
 				}
 				System.out.println("Copia de seguridad realizada");
-				JOptionPane.showMessageDialog(btnCopiaSeguridad, "Se han guardado los datos en un fichero binario.");
 			}
 		});
 		btnCopiaSeguridad.setBounds(524, 392, 205, 21);

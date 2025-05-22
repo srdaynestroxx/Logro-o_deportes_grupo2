@@ -1,0 +1,2 @@
+[2025-05-22 08:56:42] INFO: === Nueva sesión iniciada: 20250522_085642 ===
+[2025-05-22 08:56:42] INFO: Ventana 'Consultar Usuarios' abierta (Menu cerrado).

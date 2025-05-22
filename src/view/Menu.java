@@ -1,22 +1,34 @@
 package view;
-
+/**
+ * @author Grupo2 - Logroño Deportes
+ */
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import logs.Logs;
+
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Clase encargada de mostrar el menu para Administradores.
+ */
 public class Menu extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	/**
+	 * JPanel Menu
+	 */
 	private JPanel contentPane;
 
 	/**
 	 * Launch the application.
+	 * @param args Parametro para argumentos de java.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -26,6 +38,9 @@ public class Menu extends JFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					 try (main.LogronoAPP.logger) {
+							main.LogronoAPP.logger.logError("Error cargando ventana.", e);
+						}
 				}
 			}
 		});
@@ -48,6 +63,12 @@ public class Menu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new ConsultarUsuariosAdministrador().setVisible(true);
 		        Menu.this.dispose();
+		        
+		        try (main.LogronoAPP.logger) {
+
+					main.LogronoAPP.logger.logSession("Ventana 'Consultar Usuarios' abierta (Menu cerrado).");
+
+				}
 			}
 		});
 		contentPane.add(btnConsultarUsuarios);
@@ -57,6 +78,12 @@ public class Menu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new GestionReserva().setVisible(true);
 		        Menu.this.dispose();
+		        
+		        try (main.LogronoAPP.logger) {
+
+					main.LogronoAPP.logger.logSession("Ventana 'Gestionar Reservas' abierta (Menu cerrado).");
+
+				}
 			}
 		});
 		contentPane.add(btnGestionarReservas);

@@ -1,0 +1,6 @@
+[2025-05-22 12:35:36] INFO: === Nueva sesión iniciada: 20250522_123536 ===
+[2025-05-22 12:35:36] INFO: Se ha usado la opción de Importar XML.
+[2025-05-22 12:35:40] INFO: Se ha usado la opción de Importar XML.
+[2025-05-22 12:35:41] INFO: Se ha vuelto al menu.
+[2025-05-22 12:35:42] INFO: Ventana 'Gestionar Reservas' abierta (Menu cerrado).
+[2025-05-22 12:35:44] INFO: Se ha usado la opción 'Eliminar Reserva'.

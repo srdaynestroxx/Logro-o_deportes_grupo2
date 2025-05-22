@@ -1,5 +1,7 @@
 package Controlador;
-
+/**
+ * @author Grupo2 - Logroño Deportes
+ */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
@@ -41,6 +43,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import ConnectBDD.Connect;
+import logs.Logs;
+import main.LogronoAPP;
 import model.Administrador;
 import model.Empleado;
 import model.Reserva;
@@ -50,10 +54,18 @@ import view.GestionReserva;
 import view.Menu;
 import view.MenuEmpleado;
 
+/**
+ * Clase encargada de actuar como controlador entre los Models y los Views.
+ */
 public class Coordinador implements ActionListener {
 
 	ConnectBDD.Connect connect = new ConnectBDD.Connect();
 
+	/**
+	 * Constructor para la conexión con la base de datos.
+	 * @param paramAdmin Parametro para los administradores.
+	 * @param paramConnect Parametro para la conexión con la base de datos.
+	 */
 	public Coordinador(Administrador paramAdmin, ConnectBDD.Connect paramConnect) {
 		this.myConnect = paramConnect;
 
@@ -65,6 +77,14 @@ public class Coordinador implements ActionListener {
 	Reserva myReserva = new Reserva();
 	Sesion mySesion = new Sesion();
 
+	/**
+	 * Constructor con parametros para Coordinador.
+	 * @param paramConnect Parametro para la conexión con la base de datos.
+	 * @param paramAdmin Parametro para los administradores.
+	 * @param paramEmpleado Parametro para los empleados.
+	 * @param paramReserva Parametro para las reservas.
+	 * @param paramSesion Parametro para las sesiones.
+	 */
 	public Coordinador(Connect paramConnect, Administrador paramAdmin, Empleado paramEmpleado, Reserva paramReserva,
 			Sesion paramSesion) {
 		this.myConnect = paramConnect;
@@ -74,10 +94,17 @@ public class Coordinador implements ActionListener {
 		this.mySesion = paramSesion;
 	}
 
+	/**
+	 * Constructor sin parametros para Coordinador.
+	 */
 	public Coordinador() {
 
 	}
 
+	/**
+	 * Metodo para cargar los datos de los administradores en la tabla cuando el usuario acceda al view ConsultarUsuarios.
+	 * @param tablemodel Parametro de la tabla de ConsultarUsuariosAdministrador.
+	 */
 	public static void mostrarDatosUsuarioAdministrador(DefaultTableModel tablemodel) {
 
 		Connect perDb = new Connect();
@@ -100,10 +127,17 @@ public class Coordinador implements ActionListener {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			 try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logError("Error con la base de datos.", e);
+				}
 		}
 
 	}
 
+	/**
+	 * Metodo para cargar los datos de los empleados en la tabla cuando el usuario acceda a el view 'ConsultarUsuariosAdministrador'.
+	 * @param tablemodel Parametro de la tabla de ConsultarUsuariosAdministrador.
+	 */
 	public static void mostrarDatosUsuarioEmpleado(DefaultTableModel tablemodel) {
 
 		Connect perDb = new Connect();
@@ -121,10 +155,18 @@ public class Coordinador implements ActionListener {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			 try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logError("Error con la base de datos.", e);
+				}
 		}
 
 	}
 
+	/**
+	 * Método para Realizar una copia de seguridad de los usuarios (en un fichero binario) cuando el usuario presione el botón indicado.
+	 * @param btnCopiaSeguridad Parametro utlizado para el boton utilizado para realizar la copia de seguridad.
+	 * @throws SQLException Devuelve el posible error de SQL.
+	 */
 	public static void realizarFicheroBinario(JButton btnCopiaSeguridad) throws SQLException {
 
 		Connect admin = new Connect();
@@ -145,12 +187,24 @@ public class Coordinador implements ActionListener {
 			escribir.close();
 			fos.close();
 
+			JOptionPane.showMessageDialog(btnCopiaSeguridad, "Se han guardado los datos en un fichero binario.");
+			
 		} catch (Exception e) {
+			JOptionPane.showMessageDialog(btnCopiaSeguridad, "Ha ocurrido un error al realizar la copia de seguridad o se ha cancelado la operación.");
 			System.out.println("Error al escribir en el archivo. " + e.getMessage());
+			 try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logError("Error realizando la operación.", e);
+				}
 		}
 	}
 
-	public static void cargarFicheroBinario(DefaultTableModel tableModel) throws IOException, ClassNotFoundException {
+	/**
+	 * Método para cargar una copia de seguridad de los usuarios creada con anterioridad cuando el usuario presione el botón indicado.
+	 * @param tableModel Parametro utlizado para indicar la tabla de ConsultarUsuarios.
+	 * @throws IOException Devuelve la posible excepcion IO.
+	 * @throws ClassNotFoundException Devuelve el error en caso de no encontrar la clase.
+	 */
+	public static void cargarFicheroBinario(DefaultTableModel tableModel, JButton btnCargarCopia) throws IOException, ClassNotFoundException {
 
 
 	    File archivo = new File(exploradorArchivosBinario());
@@ -162,9 +216,7 @@ public class Coordinador implements ActionListener {
                 leer = new ObjectInputStream(fis);
                 
                 ArrayList<Empleado> Empleado = (ArrayList<Empleado>) leer.readObject();
-                
-                System.out.println(Empleado);
-                
+                                
                 ConsultarUsuariosAdministrador consultar = new ConsultarUsuariosAdministrador();
                 
                 	tableModel.setRowCount(0);
@@ -175,15 +227,27 @@ public class Coordinador implements ActionListener {
                     }
 
                 	}
+			JOptionPane.showMessageDialog(btnCargarCopia, "Se han cargado los datos desde un fichero binario.");
             
         } catch (Exception e) {
-            System.out.println("Error al leer el archivo. " + e.getMessage());
+            System.out.println();
+            
+			 try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logError("Error realizando la operación.", e);
+				}
 
         }
 		    
 
 	}
 
+	/**
+	 * Método utilizado en el view 'IniciarSesion' para comparar las credenciales introducidas por el usuario con las de la base de datos.
+	 * @param btnIniciarSesion Parametro encargado de el boton para realizar el inicio de sesion.
+	 * @param textFieldDNI Parametro encargado del text field en el que el usuario ingresará el DNI.
+	 * @param passwordFieldContraseña Parametro encargado del password field en el que el usuario ingresará la contraseña
+	 * @throws SQLException Devuelve el posible error de SQL.
+	 */
 	public static void InicioSesion(JButton btnIniciarSesion, JTextField textFieldDNI,
 			JPasswordField passwordFieldContraseña) throws SQLException {
 
@@ -201,6 +265,12 @@ public class Coordinador implements ActionListener {
 				Menu ventana = new Menu();
 				ventana.setVisible(true);
 				enlista = true;
+				
+				try (main.LogronoAPP.logger) {
+
+					main.LogronoAPP.logger.logSession("Inicio de sesión como administrador.");
+
+				}
 
 			} else
 				for (int b = 0; b < con.cargarEmpleado().size(); b++) {
@@ -215,16 +285,30 @@ public class Coordinador implements ActionListener {
 						ventana2.setVisible(true);
 						enlista = true;
 
+						try (main.LogronoAPP.logger) {
+
+							main.LogronoAPP.logger.logSession("Inicio de sesión como empleado.");
+
+						}
 					}
 
 				}
 		}
 		if (enlista == false) {
 			JOptionPane.showMessageDialog(null, "Las credenciales introducidas no son correctas.");
+			
+			try (main.LogronoAPP.logger) {
 
+				main.LogronoAPP.logger.logSession("Credenciales erroneas.");
+
+			}
 		}
 	}
 
+	/**
+	 * Método utilizado en el view 'GestionarReservas' y 'ConsultarReservas' para cargar los datos desde la base de datos de estas.
+	 * @param tablemodel Parametro de la tabla de las Reservas.
+	 */
 	public static void mostrarDatosReserva(DefaultTableModel tablemodel) {
 
 		ConnectBDD.Connect perDb = new ConnectBDD.Connect();
@@ -239,10 +323,17 @@ public class Coordinador implements ActionListener {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			 try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logError("Error con la base de datos.", e);
+				}
 		}
 
 	}
 
+	/**
+	 * Metodo para cargar los datos de los empleados en la tabla cuando el usuario acceda a el view 'ConsultarUsuariosEmpleado'.
+	 * @param tablemodel Parametro de la tabla 'ConsultarUsuariosEmpleado'.
+	 */
 	public static void mostrarDatosUsuario(DefaultTableModel tablemodel) {
 
 		Connect perDb = new Connect();
@@ -265,10 +356,17 @@ public class Coordinador implements ActionListener {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			 try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logError("Error con la base de datos.", e);
+				}
 		}
 
 	}
 
+	/**
+	 * Método utilizado para abrir el explorador de archivos de ficheros .xml (usado en GestionarReservas).
+	 * @return La ruta de archivo elegida por el usuario.
+	 */
 	public static String exploradorArchivos() {
 		String filepath = "";
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("XML File", "xml");
@@ -288,6 +386,10 @@ public class Coordinador implements ActionListener {
 		return filepath;
 	}
 
+	/**
+	 * Método utilizado para abrir el explorador de archivos de ficheros .dat binarios (usado en ConsultarUsuarios).
+	 * @return La ruta de archivo elegida por el usuario.
+	 */
 	public static String exploradorArchivosBinario() {
 		String filepath = "";
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("DAT File", "dat");
@@ -307,7 +409,9 @@ public class Coordinador implements ActionListener {
 		return filepath;
 	}
 
-//Eliminar Reservas
+	/**
+	 * Método utilizado para eliminar reservas de la base de datos seleccionando el dato en la tabla de 'GestionarReservas' y presionando el botón indicado.
+	 */
 	public static void eliminarReserva() {
 		Connect conexion = new Connect();
 		Connection con = conexion.conexion();
@@ -330,6 +434,9 @@ public class Coordinador implements ActionListener {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			 try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logError("Error con la base de datos.", e);
+				}
 		}
 
 		int[] rows = GestionReserva.table.getSelectedRows();
@@ -338,6 +445,9 @@ public class Coordinador implements ActionListener {
 		}
 	}
 
+	/**
+	 * Método utilizado para guardar los cambios realizados en la tabla de 'GestionarReservas' mediante el botón indicado.
+	 */
 //Editar Reservas
 	public static void editarReserva() {
 		Connect conexion = new Connect();
@@ -364,9 +474,18 @@ public class Coordinador implements ActionListener {
 
 		} catch (SQLException ex) {
 			System.out.println("Error al actualizar los datos.");
+			 try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logError("Error con la base de datos.", ex);
+				}
 		}
 	}
 
+	/**
+	 * Método utilizado para exportar los datos de la tabla 'sesiones' de la base de datos a un fichero XML mediante el botón indicado, preparandolo asi para importarlo a la página web.
+	 * @throws ParserConfigurationException Devuelve error en caso de fallar al parsear.
+	 * @throws TransformerException Devuelve error en caso de fallar en el transformer.
+	 * @throws SQLException Devuelve el posible error de SQL.
+	 */
 //Exportar Sesiones XML
 	public static void exportarXML() throws ParserConfigurationException, TransformerException, SQLException {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -414,6 +533,10 @@ public class Coordinador implements ActionListener {
 		System.out.println("Se ha creado el fichero XML.");
 	}
 
+	/**
+	 * Método utilizado para importar reservas creadas mediante un fichero XML directamente a la base de datos mediante el botón indicado.
+	 * @throws SQLException Devuelve el posible error de SQL.
+	 */
 //Importar XML a la Base de Datos (Reservas)
 	public static void importarXML() throws SQLException {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -423,7 +546,7 @@ public class Coordinador implements ActionListener {
 			Connection con = conexion.conexion();
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			documento = builder.parse(new File(exploradorArchivos()));
-			NodeList nodeList = documento.getElementsByTagName("reserva");
+			NodeList nodeList = documento.getElementsByTagName("peticion");
 			for (int i = 0; i < nodeList.getLength(); i = i + 2) {
 				Node node = nodeList.item(i);
 				String reserva = node.getTextContent();
@@ -440,12 +563,15 @@ public class Coordinador implements ActionListener {
 						"Se ha importado el XML y se ha generado un archivo .txt.");
 				try {
 					FileWriter writer = new FileWriter(
-							"C:\\Users\\1AW3-24\\git\\Logro-o_deportes_grupo2\\src\\archivosXML-TXT\\TXT\\consulta.txt");
+							"src\\archivosXML-TXT\\TXT\\consulta.txt");
 					writer.write(consulta);
 					writer.close();
 				} catch (IOException e) {
 					System.out.println("Error al generar el fichero .txt");
 					e.printStackTrace();
+					 try (main.LogronoAPP.logger) {
+							main.LogronoAPP.logger.logError("Error con Input u Output", e);
+						}
 				}
 			}
 		}
@@ -453,9 +579,15 @@ public class Coordinador implements ActionListener {
 		catch (Exception spe) {
 			JOptionPane.showMessageDialog(GestionReserva.table,
 					"Ha ocurrido un error al importar o se ha cancelado la operación.");
+			 try (main.LogronoAPP.logger) {
+					main.LogronoAPP.logger.logError("Error al realizar la operación.", spe);
+				}
 		}
 	}
-
+	
+	/**
+	 * Método para implementar ActionListener.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

@@ -1,0 +1,2 @@
+[2025-05-22 10:56:00] INFO: === Nueva sesión iniciada: 20250522_105600 ===
+[2025-05-22 10:56:01] INFO: Aplicación iniciada

@@ -1,0 +1,20 @@
+[2025-05-22 10:56:11] INFO: === Nueva sesión iniciada: 20250522_105611 ===
+[2025-05-22 10:56:11] INFO: Aplicación iniciada
+[2025-05-22 10:56:27] INFO: Inicio de sesión como administrador.
+[2025-05-22 10:56:27] INFO: Sesión iniciada.
+[2025-05-22 10:56:33] INFO: Ventana 'Gestionar Reservas' abierta (Menu cerrado).
+[2025-05-22 10:56:42] INFO: Se ha usado la opción 'Actualizar Reservas'.
+[2025-05-22 10:56:47] INFO: Se ha usado la opción de Importar XML.
+[2025-05-22 10:56:51] INFO: Se ha usado la opción de Importar XML.
+[2025-05-22 10:56:57] INFO: Se ha vuelto al menu.
+[2025-05-22 10:56:58] INFO: Ventana 'Gestionar Reservas' abierta (Menu cerrado).
+[2025-05-22 10:57:02] INFO: Se ha usado la opción 'Eliminar Reserva'.
+[2025-05-22 10:57:03] INFO: Se ha filtrado por Filtrar con el siguiente campo: 12
+[2025-05-22 10:57:04] INFO: Se ha filtrado por Filtrar con el siguiente campo: 123
+[2025-05-22 10:57:04] INFO: Se ha filtrado por Filtrar con el siguiente campo: 123
+[2025-05-22 10:57:05] INFO: Se ha filtrado por Filtrar con el siguiente campo: 
+[2025-05-22 10:57:05] INFO: Se ha filtrado por Filtrar con el siguiente campo: 
+[2025-05-22 10:57:08] INFO: Se ha vuelto al menu.
+[2025-05-22 10:57:14] INFO: Ventana 'Consultar Usuarios' abierta (Menu cerrado).
+[2025-05-22 10:57:17] INFO: Se ha usado la opción 'Cargar copia de seguridad'.
+[2025-05-22 10:57:21] INFO: Se ha vuelto al menú.

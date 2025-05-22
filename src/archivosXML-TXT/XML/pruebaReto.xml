@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="quienes-somos.xsl"?>
-<reserva>
-    <dniPersona>11122233A</dniPersona>
-    <sesionCodigo>1</sesionCodigo>
-</reserva>
+<peticion>
+    <dni>11122233A</dni>
+    <codigo>1</codigo>
+</peticion>

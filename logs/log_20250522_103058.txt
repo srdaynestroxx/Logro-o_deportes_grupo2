@@ -1,0 +1,4 @@
+[2025-05-22 10:30:58] INFO: === Nueva sesión iniciada: 20250522_103058 ===
+[2025-05-22 10:30:58] INFO: Aplicación iniciada
+[2025-05-22 10:31:17] INFO: Inicio de sesión como administrador.
+[2025-05-22 10:31:20] INFO: Ventana 'Gestionar Reservas' abierta (Menu cerrado).
